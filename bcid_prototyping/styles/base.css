@@ -1,0 +1,63 @@
+/* imports the whole design library in one go, including Font Awesome and Open Color. */
+
+@import url(./types.css);
+@import url(./inputs.css);
+@import url(./opencolor.css);
+@import url(./font-awesome/css/all.css);
+
+body {
+    margin: 0;
+
+    height: 100vh;
+
+    font-family: var(--font);
+
+    background-color: var(--oc-gray-0);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.small {
+    font-size: 0.9em;
+}
+
+.bcid-container, .bcid-container.light {
+    font-family: var(--bcid-font);
+    font-weight: 900;
+
+    background-color: var(--oc-gray-3);
+    color: var(--oc-gray-9);
+
+    display: inline;
+
+    padding: 0.5em;
+
+    border-radius: 0.5em;
+}
+
+.bcid-container.dark {
+    background-color: var(--oc-gray-9);
+    color: var(--oc-gray-3);
+}
+
+.bc-font, h1, h2, h3, h4, h5, h6 {
+    font-family: var(--bc-font);
+}
+
+.bc-logo .weight1 {
+    font-weight: var(--bc-weight-1);
+}
+
+.bc-logo .weight2 {
+    font-weight: var(--bc-weight-2);
+}
+
+.bc-logo .weight3 {
+    font-weight: var(--bc-weight-3);
+}

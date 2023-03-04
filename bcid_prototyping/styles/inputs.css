@@ -1,0 +1,48 @@
+
+.bc-btn, button {
+    all: unset;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    font-family: var(--font);
+}
+
+.bc-btn:hover, button:hover {
+    background-color: var(--oc-gray-4);
+} 
+
+.bc-btn-primary {
+    background-color: var(--oc-blue-5);
+    color: var(--oc-white);
+}
+
+.bc-btn-primary:hover {
+    background-color: var(--oc-blue-6);
+}
+
+input[type="checkbox"] {
+    all: unset;
+    cursor: pointer;
+    display: inline-block;
+    background-color: var(--oc-gray-4);
+    border-radius: 0.25em;
+    width: 1em;
+    height: 1em;
+
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="checkbox"]:checked {
+
+
+    background-color: var(--oc-blue-5);
+    color: var(--oc-white);
+}
+input[type="checkbox"]:checked:hover {
+    background-color: var(--oc-blue-6);
+}   
