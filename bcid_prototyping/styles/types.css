@@ -1,16 +1,23 @@
+/* This file deals with font types and font families. */
 
-/* Fonts. */
+@import url(https://fonts.bunny.net/css?family=montserrat:400,400i,600,600i,700,700i,900,900i);
+@import url(/fontawesome/css/all.css);
 
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap'); /* for BCIDs */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;800;900&display=swap'); /* For title, byecorps logo, headers, etc */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap'); /* For body text */
+html {
+    font-family: 'montserrat', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-:root {
-    --bcid-font: 'Courier Prime', monospace;
-    --bc-font: 'Montserrat', sans-serif;
-    --font: 'IBM Plex Sans', sans-serif;
+.bc-1 {
+    font-weight: 700;
+}
 
-    --bc-weight-1: 700;
-    --bc-weight-2: 600;
-    --bc-weight-3: 900;
+.bc-2 {
+    font-weight: 600;
+}
+
+.bc-3 {
+    font-weight: 400;
 }

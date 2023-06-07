@@ -5,6 +5,10 @@
 @import url(./opencolor.css);
 @import url(./font-awesome/css/all.css);
 
+:root {
+    color-scheme: light dark;
+}
+
 body {
     margin: 0;
 
@@ -17,6 +21,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+main {
+    width: 100%;
+    max-width: 600px;
+    margin:auto;
+    /* align vertically */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    flex: 0 1 auto;
+
+    background-color: var(--oc-white);
+
+    box-shadow: 0 0 10px var(--oc-gray-4);
+
+    border-radius: calc(0.5em + 10px + 1em);
+    padding: 1em;
 }
 
 .center {
@@ -46,6 +69,15 @@ body {
     color: var(--oc-gray-3);
 }
 
+code, .code {
+    font-family: var(--bcid-font);
+    background-color: var(--oc-gray-3);
+    color: var(--oc-gray-9);
+
+    padding: .1em; border-radius: .2em;
+
+}
+
 .bc-font, h1, h2, h3, h4, h5, h6 {
     font-family: var(--bc-font);
 }
@@ -60,4 +92,35 @@ body {
 
 .bc-logo .weight3 {
     font-weight: var(--bc-weight-3);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+    background-color: var(--oc-gray-9);
+    }
+    main {
+    background-color: var(--oc-gray-8);
+    box-shadow: 0 0 10px var(--oc-gray-9);
+    }
 }

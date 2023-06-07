@@ -41,7 +41,7 @@
             <div class="password-strength">
                 <p style="margin: 0;">Password requirements:</p>
                 <ul>
-                    <li><i class="fa-fw fa-solid fa-circle-xmark"></i> At least 8 characters</li>
+                    <li><i style="color: var(--oc-red-5);" class="fa-fw fa-solid fa-circle-xmark"></i> At least 8 characters</li>
                 </ul>
 
                 <script>
@@ -63,8 +63,33 @@
                             passwordStrengthList[0].querySelector("i").classList.add("fa-circle-xmark");
                         }
                     });
+                </script>
+            </div>
 
+            <div class="input password-confirm">
+                <label for="password-confirm"><i aria-hidden="true" class="fa-solid fa-fw fa-lock" title="Password"></i><span class="fa-sr-only">Confirm password</span></label>
+                <input type="password" name="password-confirm" id="password-confirm" required placeholder="Confirm password" />
+            </div>
 
+            <div class="password-confirm-requirements">
+                <i class="fa-fw fa-solid fa-circle-xmark"></i> Passwords match
+
+                <script>
+                    let passwordConfirm = document.getElementById("password-confirm");
+
+                    passwordConfirm.addEventListener("input", function() {
+                        let passwordConfirmValue = passwordConfirm.value;
+                        let passwordConfirmLength = passwordConfirmValue.length;
+                        let passwordConfirmRequirements = document.querySelector(".password-confirm-requirements");
+
+                        if (passwordConfirmValue == password.value) {
+                            passwordConfirmRequirements.querySelector("i").classList.remove("fa-circle-xmark");
+                            passwordConfirmRequirements.querySelector("i").classList.add("fa-circle-check");
+                        } else {
+                            passwordConfirmRequirements.querySelector("i").classList.remove("fa-circle-check");
+                            passwordConfirmRequirements.querySelector("i").classList.add("fa-circle-xmark");
+                        }
+                    });
                 </script>
             </div>
 

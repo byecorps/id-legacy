@@ -1,0 +1,115 @@
+
+.bc-btn, button {
+    all: unset;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    font-family: var(--font);
+}
+
+.bc-btn:hover, button:hover {
+    background-color: var(--oc-gray-4);
+} 
+
+.bc-btn-primary {
+    background-color: var(--oc-blue-5);
+    color: var(--oc-white);
+}
+
+.bc-btn-primary:hover {
+    background-color: var(--oc-blue-6);
+}
+
+input[type="checkbox"] {
+    all: unset;
+    cursor: pointer;
+    display: inline-block;
+    background-color: var(--oc-gray-4);
+    border-radius: 0.25em;
+    width: 1em;
+    height: 1em;
+
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="checkbox"]:checked {
+
+
+    background-color: var(--oc-blue-5);
+    color: var(--oc-white);
+}
+input[type="checkbox"]:checked:hover {
+    background-color: var(--oc-blue-6);
+}   
+
+.input:has(input[data-com-onepassword-filled="dark"]) {
+    background-color: rgb(36, 107, 179) !important;
+}
+
+.input:has(input[data-com-onepassword-filled="light"]) {
+    background-color: rgb(219, 237, 255) !important;
+}
+
+input[data-com-onepassword-filled="dark"] {
+    color: var(--oc-blue-0) !important;
+}
+
+input[data-com-onepassword-filled="light"] {
+    color: var(--oc-blue-8) !important;
+}
+
+
+ .input {
+    padding: 0.5em;
+
+    /* width: 100%; */
+
+
+    flex-grow: 1;
+
+    border: none;
+    border-radius: 0.5em;
+
+    background-color: var(--oc-gray-4);
+
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+ .input label.hasborder {
+    border-right: 1px solid var(--oc-gray-5);
+
+    padding-right: .3rem;
+}
+
+ .input input {
+    all: unset;
+    flex: 1 0 auto;
+}
+
+ .input button {
+    all: unset;
+    cursor: pointer;
+
+    border-left: 1px solid var(--oc-gray-5);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    .input {
+        background-color: var(--oc-gray-8);
+    }
+
+    .input input {
+        color: var(--oc-gray-0);
+    }
+
+    .input label.hasborder {
+        border-right: 1px solid var(--oc-gray-9);
+    }
+}

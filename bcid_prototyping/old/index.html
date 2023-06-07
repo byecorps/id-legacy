@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCID visual styles and testing</title>
+    <link rel="stylesheet" href="./styles/base.css">
+</head>
+<body>
+    <main>
+        <div id="content">
+            <p>This page is for testing styling for <code>id</code>. Nothing on this page is funcitonal, but please be wary of password managers trying to autofill information.</p>
+            <h2>Types</h2>
+            <p>This section tests the fonts that may be used, including in context.</p>
+            <h3>ByeCorps ID</h3>
+            <div class="bcid-container">
+                123 ABC4
+            </div>
+            <p>Randomly generated on page load:</p>
+            <div class="bcid-container">
+                <script>
+                    function generateBCID() {
+                        // Alphanumeric characters, prefer uppercase
+                        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                        let result = "";
+                        for (let i = 0; i < 3; i++) {
+                            result += chars.charAt(Math.floor(Math.random() * chars.length));
+                        }
+                        result += " ";
+                        for (let i = 0; i < 4; i++) {
+                            result += chars.charAt(Math.floor(Math.random() * chars.length));
+                        }
+                        return result;
+                    }
+                    document.write(generateBCID());
+                </script>
+            </div>
+            <h3>Paragraph</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi sed ipsam at quas odit? Harum aut itaque earum natus officia reprehenderit, a totam magni, vero at modi blanditiis iusto voluptate!</p>
+            <h3>Logo</h3>
+            <p>very important</p>
+            <h1 class="bc-font">
+                <span class="bc-logo">
+                    <span class="weight1">Bye</span><span class="weight2">Corps</span>
+                    <span class="weight3"> ID</span>
+                </span>
+            </h1>
+
+        </div>
+    </main>
+
+</body>
+</html>
