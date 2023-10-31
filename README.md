@@ -15,7 +15,7 @@ Example of a BCID:
 123 ABC4
 ```
 
-## Connonical domain names
+## Canonical domain names
 
 Only input your BCID on the following domain names ONLY on a HTTPS connection:
 
