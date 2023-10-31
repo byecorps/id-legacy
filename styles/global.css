@@ -1,7 +1,7 @@
-@import url(./colours.css);
 @import url(./types.css);
 @import url(./design.css);
 @import url(./layout.css);
+@import url(./colours.css);
 
 :root {
     color-scheme: light dark;

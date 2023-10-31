@@ -12,9 +12,11 @@
     --fern-green: #65743a;
     --flax: #efdd8d;
     --mindaro: #f4fdaf;
+
+    color-scheme: light dark;
 }
 
-button, .button {
+button.primary, .button.primary {
     color: var(--black-bean);
     background-color: var(--flax);
 }
@@ -29,7 +31,7 @@ header a {
 }
 
 @media screen and (prefers-color-scheme: dark) {
-    button, .button {
+    button.primary, .button.primary {
         color: var(--flax);
         background-color: var(--dark-slate-gray);
     }

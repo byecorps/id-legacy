@@ -18,3 +18,13 @@ button, .button {
 header a {
     text-decoration: none;
 }
+
+/* inputs */
+
+input {
+  all: unset;
+  padding: 1em;
+  text-align: start;
+
+  border-radius: 1em;
+}

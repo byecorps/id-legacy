@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 font-awesome/
+
+config.php
