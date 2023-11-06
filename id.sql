@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `accounts` (
   `id` tinytext NOT NULL COMMENT 'BCID',
   `email` text NOT NULL,
-  `password` text NOT NULL COMMENT 'Hashed!!!',
+  `display_name` text NULL,
+  `password` text NOT NULL,
   `verified` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

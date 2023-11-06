@@ -1,6 +1,6 @@
 <?php
 
-function ganerate_bcid() {
+function generate_bcid() {
     $CHARS = str_split("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
     return $CHARS[array_rand($CHARS)].$CHARS[array_rand($CHARS)].$CHARS[array_rand($CHARS)].$CHARS[array_rand($CHARS)].$CHARS[array_rand($CHARS)].$CHARS[array_rand($CHARS)].$CHARS[array_rand($CHARS)];
 }
@@ -16,19 +16,17 @@ function validate_bcid($bcid) {
     return 0; // fail condition
 }
 
-$BCID = ganerate_bcid();
+function format_bcid ($bcid) { // Formats to XXX-XXXX
+    $stripped_bcid = str_replace([' ','-'], '', $bcid);
+    $stripped_bcid = strtoupper($stripped_bcid);
 
-echo "<pre>";
-echo "Random BCID (unformatted): $BCID
-";
-echo "Check if BCID is valid: ".validate_bcid($BCID)."
-";
+    if (!validate_bcid($stripped_bcid)) {
+        throw new Exception('Invalid BCID.');
+    }
 
-if ($query['bcid']) {
-    echo "BCID provided in the query: ".$query['bcid']."
-";
-    echo "Checking the BCID provided in the query: ".validate_bcid($query['bcid'])."
-";
+    return substr($stripped_bcid, 0, 3).'-'.substr($stripped_bcid, -4, 4);
 }
 
+
+$BCID = generate_bcid();
 ?>

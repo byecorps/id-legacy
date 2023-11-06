@@ -1,6 +1,8 @@
 /* This file deals with font types and font families. */
 
 @import url(https://fonts.bunny.net/css?family=montserrat:400,400i,600,600i,700,700i,900,900i);
+@import url(https://fonts.bunny.net/css2?family=courier+prime:wght@400;700&display=swap); /* for BCIDs */
+
 @import url(/fontawesome/css/all.css);
 
 html {
@@ -8,6 +10,16 @@ html {
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h2.subheading {
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+h2.subheading + h1 {
+    margin-top: 0;
 }
 
 .bc-1 {
@@ -22,6 +34,18 @@ html {
     font-weight: 400;
 }
 
+.bcid {
+    font-family: 'Courier Prime', monospace;
+}
+
 .center {
     text-align: center;
+}
+
+.icon-true::before {
+    content: "\f00c";
+}
+
+.icon-false::before {
+    content: "\f00d";
 }

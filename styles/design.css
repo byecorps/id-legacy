@@ -28,3 +28,20 @@ input {
 
   border-radius: 1em;
 }
+
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  -moz-appearance: checkbox;
+  -ms-appearance: checkbox;
+  -o-appearance: checkbox;
+  appearance: checkbox;
+
+  width: 1em;
+  height: 1em;
+  margin: 0 0.5em 0 0;
+}
+
+input:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}

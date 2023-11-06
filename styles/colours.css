@@ -13,12 +13,29 @@
     --flax: #efdd8d;
     --mindaro: #f4fdaf;
 
+    /* open colors: used for debugging */
+    --red-5: #ff6b6b;
+    --red-5-transparent: #ff6b6b3a;
+    --red-8: #e03131;
+    --green-5: #51cf66;
+    --green-8: #2f9e44;
+
     color-scheme: light dark;
+}
+
+button, .button {
+    background-color: #1f302b40;
+    color: var(--white);
 }
 
 button.primary, .button.primary {
     color: var(--black-bean);
     background-color: var(--flax);
+}
+
+button.danger, .button.danger {
+    color: var(--white);
+    background-color: var(--red-5);
 }
 
 header {
@@ -28,6 +45,49 @@ header {
 
 header a {
     color: var(--dark-slate-gray);
+}
+
+input {
+    all: unset;
+    padding: 1em;
+    text-align: start;
+
+    border-radius: 1em;
+
+    background-color: #c0c0c077;
+}
+
+input[data-com-onepassword-filled="light"] {
+    background-color: var(--byecorps-white) !important;
+}
+
+input[data-com-onepassword-filled="dark"] {
+    background-color: var(--byecorps-blue) !important;
+}
+
+.icon-true {
+    color: var(--green-8);
+}
+
+.icon-false {
+    color: var(--red-8);
+}
+
+.dangerzone {
+    background-color: var(--red-5-transparent);
+    color: var(--white);
+
+    padding: 0.5rem 1em;
+    border-radius: 1em;
+
+}
+
+.dangerzone h2 {
+    margin: 0;
+}
+
+.dangerzone p {
+    margin: 0;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -42,6 +102,23 @@ header a {
     }
 
     header a {
+        color: var(--flax);
+    }
+
+    input {
+
+        background-color: #2c2c2c77;
+    }
+
+    .icon-true {
+        color: var(--green-5);
+    }
+
+    .icon-false {
+        color: var(--red-5);
+    }
+
+    a, a:visited, a:link {
         color: var(--flax);
     }
 }
