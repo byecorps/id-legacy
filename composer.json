@@ -1,0 +1,6 @@
+{
+    "require": {
+        "sentry/sdk": "^4.0",
+        "phpmailer/phpmailer": "^6.8"
+    }
+}

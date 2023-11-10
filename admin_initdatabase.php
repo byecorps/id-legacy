@@ -1,18 +1,12 @@
 <?php 
 
-if ($_SESSION['id'] != "281G3NV") {
-    http_response_code(401);
-    die("<img src='https://http.cat/401.jpg'>");
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST['init'] == 'Init') {
         echo("<p>Initialising DB...");
-        $pdo = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD, PDO_OPTIONS);
         echo "<p>Create table `accounts`";
         $stmt = $pdo->prepare('CREATE TABLE `accounts` (
             `id` tinytext NOT NULL,
-            `email` text NOT NULL,,
+            `email` text NOT NULL,
             `display_name` text NULL,
             `password` text NOT NULL,
             `verified` tinyint(1) NOT NULL

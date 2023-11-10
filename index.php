@@ -1,10 +1,24 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
 
 session_start();
 
 include("config.php");
+
+$pdo = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD, PDO_OPTIONS);
+
 include("id_handler.php");
 include("time_handler.php");
+require "misc_functions.php";
+include("accounts_handler.php");
+
+//\Sentry\init([
+//    'dsn' => SENTRY_DSN,
+//    // Specify a fixed sample rate
+//    'traces_sample_rate' => 1.0,
+//    // Set a sampling rate for profiling - this is relative to traces_sample_rate
+//    'profiles_sample_rate' => 1.0,
+//]);
 
 function does_variable_exists( $variable ) {
     return (isset($$variable)) ? "true" : "false";
@@ -34,7 +48,6 @@ else {
     $query = array();
 }
 
-$pdo = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD, PDO_OPTIONS);
 
 $include = "404.html";
 // routing
@@ -47,8 +60,9 @@ $paths = array(
     "/signin" => ["signin.php", "Sign in"],
     "/signup" => ["signup.php", "Sign up"],
     "/signout" => ["signout.php", "Signed out"],
-    "/forgot_password" => ["forgot_password.php", "Forgot password"],
-    "/admin/signinas" => ["signinas.php"]
+    "/forgot/password" => ["forgot_password.php", "Forgot password"],
+    "/admin/signinas" => ["signinas.php"],
+    "/reset/password" => ["reset_password.php", "Reset password"],
 );
 
 if (isset($paths[$path])) {
@@ -76,6 +90,7 @@ else {
         <?php 
         
         if ($uri[0] == "admin" && $_SESSION['id'] != "281G3NV") {
+
             http_response_code(401);
             die("<img src='https://http.cat/401.jpg'>");
         }

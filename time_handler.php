@@ -44,4 +44,8 @@ function time2str($ts)
     }
 }
 
-?>
+function hasTimePassed ($time):bool {
+	$currentTime = time();
+
+	return $currentTime > $time;
+}
