@@ -13,6 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validate_bcid($BCID)) {
         die("Server-side error with your BCID #. Try again.");
     }
+
+    // First: check if restraints will be broken
+    $sql = "SELECT * FROM accounts WHERE email = ?";
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$email]);
+	    $result = $stmt->fetch();
+
+        if (!empty($result)) {
+            die("Email is already registered. (923)");
+        }
+    } catch (PDOException $e) {
+	    http_response_code(500);
+	    die("An error occured: $e");
+    }
     
     try {
         $sql = "INSERT INTO `accounts` (`id`, `email`, `password`, `verified`) VALUES (?, ?, ?, ?)";
@@ -20,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$BCID, $email, $password, 0]);
             $result = $stmt->fetch();
-            echo "Failed successfully: $result";
+            echo "You've signed up!";
         } catch (PDOException $e) {
                 http_response_code(500);
                 die("An error occured: $e");

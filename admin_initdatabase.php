@@ -4,13 +4,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST['init'] == 'Init') {
         echo("<p>Initialising DB...");
         echo "<p>Create table `accounts`";
-        $stmt = $pdo->prepare('CREATE TABLE `accounts` (
-            `id` tinytext NOT NULL,
-            `email` text NOT NULL,
-            `display_name` text NULL,
-            `password` text NOT NULL,
-            `verified` tinyint(1) NOT NULL
-          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;');
+        $stmt = $pdo->prepare('create table accounts
+(
+    id           varchar(7)                       not null
+        primary key,
+    email        text                             not null,
+    created_date date default current_timestamp() not null,
+    display_name text                             null,
+    password     text                             not null,
+    verified     tinyint(1)                       not null,
+    constraint email
+        unique (email) using hash
+);');
         
         try {
             $stmt->execute();
@@ -18,10 +23,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo('<p>An error occurred: '. $e->getMessage() .'. Will skip. (Most likely the table already exists.)');
         }
 
-        echo '<p>Set indexes for table `accounts`';
-        $stmt = $pdo->prepare('ALTER TABLE `accounts`
-        ADD PRIMARY KEY (`id`(7)),
-        ADD UNIQUE KEY `email` (`email`) USING HASH;');
+        echo '<p>Create the `password_resets` table</p>';
+        $stmt = $pdo->prepare('create table password_resets
+(
+    id         int auto_increment
+        primary key,
+    auth_id    tinytext   not null,
+    owner_id   varchar(7) not null,
+    expiration int        not null,
+    constraint password_resets_ibfk_1
+        foreign key (owner_id) references accounts (id)
+);
+
+create index owner_id
+    on password_resets (owner_id);
+');
 
         try {
             $stmt->execute();

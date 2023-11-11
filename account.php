@@ -127,6 +127,7 @@ if (isset($message )) {
 
 <div class="dangerzone">
     <h2>Danger Zone</h2>
-    <p><a href="/signout" class="button"><i class="fa-fw fa-solid fa-person-through-window"></i> Sign out</a> <a href="/dangerous/delete_account" class="button danger">Delete account</a></p>
+    <p><a href="/signout" class="button"><i class="fa-fw fa-solid fa-person-through-window"></i> Sign out</a>
+        <a href="/dangerous/delete_account" class="button danger"><i class="fa-fw fa-solid fa-trash"></i> Delete account</a></p>
 </div>
 

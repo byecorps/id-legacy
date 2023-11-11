@@ -54,6 +54,7 @@ $include = "404.html";
 
 $paths = array(
     "/" => ["landing.php"],
+    "/admin" => ['admin.php'],
     "/admin/init/database" => ["admin_initdatabase.php"],
     "/admin/accounts" => ["admin_accounts.php"],
     "/account" => ["account.php", "Your account"],
@@ -88,12 +89,16 @@ else {
     <?php include("header.php"); ?>
     <main>
         <?php 
-        
-        if ($uri[0] == "admin" && $_SESSION['id'] != "281G3NV") {
 
-            http_response_code(401);
-            die("<img src='https://http.cat/401.jpg'>");
+        if (!empty($uri)) {
+            print_r ($uri);
+	        if ($uri[0] == "admin" && $_SESSION['id'] != "281G3NV") {
+
+		        http_response_code(401);
+		        die("<img src='https://http.cat/401.jpg'>");
+	        }
         }
+
 
         include($include); ?>
     </main>

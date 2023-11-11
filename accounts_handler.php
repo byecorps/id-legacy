@@ -68,3 +68,36 @@ Tobikomu yuuki ni sansei mamonaku start!');
 	return false;
 
 }
+
+function get_id_for_password_reset($reset_id, $reset_token):string {
+	global $pdo;
+	$sql = 'SELECT * FROM password_resets WHERE id = ?';
+
+	try {
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute([$reset_id]);
+		$result = $stmt->fetch();
+	} catch (PDOException $e) {
+		http_response_code(500);
+		die("An error occurred fetching data from the database. (11)
+		$e");
+	}
+
+	return $result['owner_id'];
+}
+
+function delete_password_reset($reset_id, $reset_token): void
+{
+	global $pdo;
+	$sql = 'DELETE FROM password_resets WHERE id = ?';
+	try {
+		$stmt = $pdo->prepare(($sql));
+		$stmt->execute([$reset_id]);
+		header("Location: /signin");
+		die();
+	} catch (PDOException $e) {
+		http_response_code(500);
+		die("An error occurred deleting data from the database. (13)
+		$e");
+	}
+}
