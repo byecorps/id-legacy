@@ -1,5 +1,7 @@
 <?php 
 
+$_SESSION['id'] = null;
+$_SESSION['auth'] = false;
 session_destroy();
 
 ?>

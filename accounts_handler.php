@@ -1,6 +1,43 @@
 <?php
 // This file carries functions related to accounts.
 
+function get_avatar_url($bcid):string {
+	global $pdo;
+
+	$sql = "SELECT has_pfp FROM `accounts` WHERE id = ?";
+
+	try {
+		$stmt = $pdo -> prepare($sql);
+		$stmt->execute([$bcid]);
+		$has_pfp = $stmt->fetch();
+	} catch (PDOException $e) {
+		http_response_code(500);
+		die($e);
+	}
+
+	$appendix = "default.png";
+
+	if ($has_pfp['has_pfp']) {
+		$appendix = $bcid;
+	}
+
+	return 'https://cdn.byecorps.com/id/profile/'.$appendix;
+
+}
+
+function get_display_name($bcid, $use_bcid_fallback=true):string {
+	$display_name = db_execute("SELECT display_name FROM accounts WHERE id = ?", [$bcid])['display_name'];
+	if (!empty($display_name)) {
+		return $display_name;
+	}
+
+	if ($use_bcid_fallback) {
+		return $bcid;
+	}
+
+	return "";
+}
+
 // Password resets
 const PASSWORD_RESET_VALIDITY = 300; // in seconds.
 function create_password_reset($bcid):string {

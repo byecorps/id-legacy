@@ -16,6 +16,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/sentry/sentry" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/options-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/erusev/parsedown" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/erusev/parsedown-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kornrunner/blurhash" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -6,7 +6,7 @@
 @import url(/fontawesome/css/all.css);
 
 html {
-    font-family: 'montserrat', sans-serif;
+    font-family: montserrat, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -20,6 +20,10 @@ h2.subheading {
 
 h2.subheading + h1 {
     margin-top: 0;
+}
+
+#sitetitle, .font-montserrat, h1, h2, h3, h4, h5, h6, legend {
+    font-family: 'montserrat', sans-serif;
 }
 
 .bc-1 {

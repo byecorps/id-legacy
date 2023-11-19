@@ -19,8 +19,19 @@
     --red-8: #e03131;
     --green-5: #51cf66;
     --green-8: #2f9e44;
+    --grey-0: #f8f9fa;
+    --grey-2: #e9ecef;
+    --grey-8: #343a40;
+    --grey-9: #212529;
+
+    --background: white;
+    --background-dark: #121212;
 
     color-scheme: light dark;
+}
+
+html {
+    background: var(--background, white);
 }
 
 button, .button {
@@ -47,7 +58,7 @@ header a {
     color: var(--dark-slate-gray);
 }
 
-input {
+input, textarea {
     all: unset;
     padding: 1em;
     text-align: start;
@@ -91,6 +102,10 @@ input[data-com-onepassword-filled="dark"] {
 }
 
 @media screen and (prefers-color-scheme: dark) {
+    html {
+        background: var(--background-dark, #121212);
+    }
+
     button.primary, .button.primary {
         color: var(--flax);
         background-color: var(--dark-slate-gray);
@@ -105,7 +120,7 @@ input[data-com-onepassword-filled="dark"] {
         color: var(--flax);
     }
 
-    input {
+    input, textarea {
 
         background-color: #2c2c2c77;
     }

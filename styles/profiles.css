@@ -1,0 +1,39 @@
+
+#profile {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    width: 750px;
+    border-radius: 2em;
+    align-items: center;
+
+    margin: auto;
+
+    background: var(--grey-0);
+}
+
+#profile > .avatar {
+    height: 150px;
+
+    border-radius: 1em;
+}
+
+#profile > .info > .displayname {
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+#profile > .info > .bcid {
+    font-size: 1.5rem;
+}
+
+#details {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    #profile {
+        background: var(--grey-9);
+    }
+}

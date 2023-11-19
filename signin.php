@@ -28,7 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($query['callback'])) {
             header("Location: ".$query['callback']);
         } else {
-            header("Location: /account");
+            header("Location: /profile");
+//            echo "<pre>";
+//            var_dump($user);
+//            var_dump($_SESSION);
+//            die();
         }
 
         exit;
@@ -52,5 +56,5 @@ if (isset($message)) {
 </form>
 
 <p class="center">
-    <!--<a href="/forgot_password">Forgot password?</a> ·--> New? <a href="/register">Register</a> for a ByeCorps ID.
+    <a href="/forgot/password">Forgot password?</a> &bull; New? <a href="/register">Register</a> for a ByeCorps ID.
 </p>

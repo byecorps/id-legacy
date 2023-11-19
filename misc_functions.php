@@ -8,3 +8,7 @@ function generateRandomString($length = 10) {
 	}
 	return $randomString;
 }
+
+function current_git_commit():string {
+	return trim(exec("git log --pretty=\"%h\" -n1 HEAD 2>&1"));
+}

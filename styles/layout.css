@@ -4,6 +4,8 @@ body {
 
     display: flex;
     flex-direction: column;
+
+    min-height: 100vh;
 }
 
 header {
@@ -20,6 +22,7 @@ header .start {
     display: flex;
 
     gap: 1rem;
+
 }
 
 header .middle {
@@ -30,12 +33,21 @@ header .middle {
 header .end {
     margin-left: auto;
     display: flex;
+    gap: 1rem;
+}
+
+header .avatar {
+    height: 1.5em;
 }
 
 main {
     height: 100%;
     flex: 1;
     padding: 1rem 1rem;
+
+    max-width: 1500px;
+    margin: auto;
+    width: 100%;
 }
 
 footer {
@@ -62,7 +74,7 @@ legend {
 }
 
 form:has(fieldset) {
-    
+
     /* fit two fieldsets side by side */
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -123,8 +135,16 @@ form {
     gap: 1rem;
 }
 
+.hero .logo {
+    height: 128px;
+}
+
 .accountnav {
     display: flex;
     gap: 1rem;
+}
+
+#wrapper {
+    display: flex;
 }
 

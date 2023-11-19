@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-if (isset($_SESSION['auth'])) {
+if ($_SESSION['auth']) {
     header('Location: /account');
 }
 

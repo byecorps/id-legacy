@@ -1,6 +1,6 @@
 <?php 
 
-if (!isset($_SESSION['auth'])) {
+if (!$_SESSION['auth']) {
     header('Location: /signin?callback=/account');
     exit;
 }
@@ -16,7 +16,7 @@ function get_gravatar_url( $email ) {
   
     // Grab the actual image URL
     return 'https://www.gravatar.com/avatar/' . $hash;
-  }
+}
 
 $stmt = $pdo->prepare('SELECT * FROM accounts WHERE id = ? LIMIT 1');
 $stmt->execute([$_SESSION['id']]);
@@ -59,6 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $message = "Updated sucessfully. Changes might take a few minutes to take effect.";
 
+    header('Location: /profile');
+    die("Redirecting...");
+
 }
 
 skip_submit:
@@ -73,61 +76,68 @@ if (isset($message )) {
         } 
 ?>
 
-<div id="profile">
-    <img src="<?= get_gravatar_url($user['email']) ?>">
-    <div class="details">
-        <span class="displayname"><?= $user['display_name'] ?></span>
-        <span class="bcid"><?= format_bcid($user['id']); ?></span>
-        <time datetime="<?= $user["created_date"] ?>">Since <?= $user["created_date"]; ?></time>
+<div id="wrapper">
+    <div id="profile">
+        <img src="<?= get_avatar_url($user['id']); ?>">
+        <div class="details">
+            <span class="displayname"><?= $user['display_name'] ?></span>
+            <span class="bcid"><?= format_bcid($user['id']); ?></span>
+            <time datetime="<?= $user["created_date"] ?>">Since <?= $user["created_date"]; ?></time>
+        </div>
     </div>
+
+    <aside>
+
+        <form method="post">
+            <fieldset>
+                <legend>Profile</legend>
+                <div class="container">
+                    <label>BCID</label>
+                    <input type="text" disabled value="<?= format_bcid($user['id']) ?>">
+                </div>
+
+                <div class="container">
+                    <input type="checkbox" disabled checked="<?= $user['verified'] ?>" >
+                    <label> Verified email</label>
+                </div>
+
+                <div class="container">
+                    <label for="email">Email address</label>
+                    <input type="email" name="email" id="email" value="<?= $user['email'] ?>">
+                </div>
+
+                <div class="container">
+                    <label for="display_name">Display name</label>
+                    <input type="text" name="display_name" id="display_name" value="<?= $user['display_name'] ?>">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Password</legend>
+                <p>You only need to insert values here if you're resetting your password.</p>
+                <div class="container">
+                    <label for="old_password">Current password</label>
+                    <input type="password" name="old_password" id="old_password">
+                </div>
+                <div class="container">
+                    <label for="new_password">New password</label>
+                    <input type="password" name="new_password" id="new_password">
+                </div>
+                <div class="container">
+                    <label for="repeat_new_password">Repeat new password</label>
+                    <input type="password" name="repeat_new_password" id="repeat_new_password">
+                </div>
+            </fieldset>
+
+            <button class="primary" type="submit"><i class="fa-fw fa-solid fa-floppy-disk"></i> Save</button>
+        </form>
+
+        <div class="dangerzone">
+            <h2>Danger Zone</h2>
+            <p><a href="/signout" class="button"><i class="fa-fw fa-solid fa-person-through-window"></i> Sign out</a>
+                <a href="/dangerous/delete_account" class="button danger"><i class="fa-fw fa-solid fa-trash"></i> Delete account</a></p>
+        </div>
+    </aside>
 </div>
 
-<form method="post">
-    <fieldset>
-        <legend>Profile</legend>
-        <div class="container">
-            <label>BCID</label>
-            <input type="text" disabled value="<?= format_bcid($user['id']) ?>">
-        </div>
 
-        <div class="container">
-            <input type="checkbox" disabled checked="<?= $user['verified'] ?>" >
-            <label> Verified email</label>
-        </div>
-
-        <div class="container">
-            <label for="email">Email address</label>
-            <input type="email" name="email" id="email" value="<?= $user['email'] ?>">
-        </div>
-
-        <div class="container">
-            <label for="display_name">Display name</label>
-            <input type="text" name="display_name" id="display_name" value="<?= $user['display_name'] ?>">
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend>Password</legend>
-        <p>You only need to insert values here if you're resetting your password.</p>
-        <div class="container">
-            <label for="old_password">Current password</label>
-            <input type="password" name="old_password" id="old_password">
-        </div>
-        <div class="container">
-            <label for="new_password">New password</label>
-            <input type="password" name="new_password" id="new_password">
-        </div>
-        <div class="container">
-            <label for="repeat_new_password">Repeat new password</label>
-            <input type="password" name="repeat_new_password" id="repeat_new_password">
-        </div>
-    </fieldset>
-
-    <button class="primary" type="submit"><i class="fa-fw fa-solid fa-floppy-disk"></i> Save</button>
-</form>
-
-<div class="dangerzone">
-    <h2>Danger Zone</h2>
-    <p><a href="/signout" class="button"><i class="fa-fw fa-solid fa-person-through-window"></i> Sign out</a>
-        <a href="/dangerous/delete_account" class="button danger"><i class="fa-fw fa-solid fa-trash"></i> Delete account</a></p>
-</div>
 

@@ -1,24 +1,35 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 session_start();
+
+use kornrunner\Blurhash\Blurhash;
+
+if (empty($_SESSION)) {
+    $_SESSION['auth'] = false;
+}
 
 include("config.php");
 
 $pdo = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD, PDO_OPTIONS);
 
-include("id_handler.php");
 include("time_handler.php");
 require "misc_functions.php";
+require "database.php";
+include("id_handler.php");
 include("accounts_handler.php");
 
-//\Sentry\init([
-//    'dsn' => SENTRY_DSN,
-//    // Specify a fixed sample rate
-//    'traces_sample_rate' => 1.0,
-//    // Set a sampling rate for profiling - this is relative to traces_sample_rate
-//    'profiles_sample_rate' => 1.0,
-//]);
+if ($_SESSION['auth']) {
+	$user = db_execute("SELECT * FROM `accounts` WHERE id = ? LIMIT 1", [$_SESSION['id']]);
+}
+
+\Sentry\init([
+    'dsn' => SENTRY_DSN,
+    // Specify a fixed sample rate
+    'traces_sample_rate' => 1.0,
+    // Set a sampling rate for profiling - this is relative to traces_sample_rate
+    'profiles_sample_rate' => 1.0,
+]);
 
 function does_variable_exists( $variable ) {
     return (isset($$variable)) ? "true" : "false";
@@ -56,7 +67,10 @@ $paths = array(
     "/" => ["landing.php"],
     "/admin" => ['admin.php'],
     "/admin/init/database" => ["admin_initdatabase.php"],
-    "/admin/accounts" => ["admin_accounts.php"],
+    "/admin/list/accounts" => ["admin_accounts.php"],
+    "/admin/list/apps" => ["admin_apps.php"],
+    "/admin/create/app" => ["admin_apps_create.php"],
+
     "/account" => ["account.php", "Your account"],
     "/signin" => ["signin.php", "Sign in"],
     "/signup" => ["signup.php", "Sign up"],
@@ -64,6 +78,9 @@ $paths = array(
     "/forgot/password" => ["forgot_password.php", "Forgot password"],
     "/admin/signinas" => ["signinas.php"],
     "/reset/password" => ["reset_password.php", "Reset password"],
+    "/docs" => ["docs.php", "Docs"],
+    "/credits" => ["credits.html", "Credits"],
+    "/profile" => ["profile.php", "Profile"],
 );
 
 if (isset($paths[$path])) {
@@ -91,12 +108,19 @@ else {
         <?php 
 
         if (!empty($uri)) {
-            print_r ($uri);
-	        if ($uri[0] == "admin" && $_SESSION['id'] != "281G3NV") {
+//            print_r ($uri);
 
+            if ($uri[0] == "admin") {
+                echo "<h2 class=\"subheading\">Admin</h2>";
+            }
+
+	        if ($uri[0] == "admin" && !$user['is_admin']) {
 		        http_response_code(401);
 		        die("<img src='https://http.cat/401.jpg'>");
 	        }
+            if ($uri[0] == "docs") {
+                $include = "docs.php";
+            }
         }
 
 

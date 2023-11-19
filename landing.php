@@ -1,5 +1,6 @@
 <div class="hero">
     <div class="hero-text">
+        <img src="https://byecorps.b-cdn.net/id/bcid.svg" alt="ByeCorps ID Logo" class="logo">
         <h1><span class="bc-1">Bye</span><span class="bc-2">Corps</span><span class="bc-3"> ID</span></h1>
         <p>Log into ByeCorps and beyond with a single ID.</p>
         <!-- <p><input type="email" name="loginEmail" id="loginEmail" placeholder="Email" /></p> -->

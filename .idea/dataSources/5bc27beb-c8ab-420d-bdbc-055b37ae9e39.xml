@@ -1217,8 +1217,8 @@ phpmyadmin|schema||phpmyadmin|localhost|UPDATE|G</Grants>
     </schema>
     <schema id="327" parent="1" name="id">
       <Current>1</Current>
-      <IntrospectionTimestamp>2023-11-10.19:39:44</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-11-10.19:39:47</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-11-16.19:58:39</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-11-16.19:58:50</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
     <schema id="328" parent="1" name="phpmyadmin">
@@ -1248,94 +1248,237 @@ phpmyadmin|schema||phpmyadmin|localhost|UPDATE|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="338" parent="327" name="password_resets">
+    <table id="338" parent="327" name="apps">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <column id="339" parent="337" name="id">
+    <table id="339" parent="327" name="badges">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </table>
+    <table id="340" parent="327" name="password_resets">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </table>
+    <table id="341" parent="327" name="profiles">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </table>
+    <column id="342" parent="337" name="id">
       <DasType>varchar(7)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="340" parent="337" name="email">
+    <column id="343" parent="337" name="email">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="341" parent="337" name="created_date">
+    <column id="344" parent="337" name="created_date">
       <DasType>date|0s</DasType>
       <DefaultExpression>current_timestamp()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="342" parent="337" name="display_name">
+    <column id="345" parent="337" name="display_name">
       <DasType>text|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="343" parent="337" name="password">
+    <column id="346" parent="337" name="password">
       <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="344" parent="337" name="verified">
+    <column id="347" parent="337" name="verified">
       <DasType>tinyint(1)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <index id="345" parent="337" name="PRIMARY">
+    <column id="348" parent="337" name="has_pfp">
+      <DasType>tinyint(1)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <column id="349" parent="337" name="is_admin">
+      <DasType>tinyint(1)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <index id="350" parent="337" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="346" parent="337" name="email">
+    <index id="351" parent="337" name="email">
       <ColNames>email</ColNames>
       <Type>hash</Type>
       <Unique>1</Unique>
     </index>
-    <key id="347" parent="337" name="PRIMARY">
+    <key id="352" parent="337" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="348" parent="337" name="email">
+    <key id="353" parent="337" name="email">
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
-    <column id="349" parent="338" name="id">
+    <column id="354" parent="338" name="id">
+      <DasType>int(10)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="355" parent="338" name="owner_id">
+      <DasType>varchar(7)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="356" parent="338" name="title">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="357" parent="338" name="description">
+      <DasType>text|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="358" parent="338" name="apps_ibfk_1">
+      <ColNames>owner_id</ColNames>
+      <OnDelete>set-null</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>id</RefColNames>
+      <RefTableName>accounts</RefTableName>
+    </foreign-key>
+    <index id="359" parent="338" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="360" parent="338" name="apps_ibfk_1">
+      <ColNames>owner_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="361" parent="338" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="362" parent="339" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="350" parent="338" name="auth_id">
-      <DasType>tinytext|0s</DasType>
+    <column id="363" parent="339" name="app_id">
+      <DasType>int(11)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="351" parent="338" name="owner_id">
-      <DasType>varchar(7)|0s</DasType>
+    <column id="364" parent="339" name="title">
+      <DasType>text|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="352" parent="338" name="expiration">
-      <DasType>int(11)|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="365" parent="339" name="description">
+      <DasType>text|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="353" parent="338" name="password_resets_ibfk_1">
-      <ColNames>owner_id</ColNames>
+    <column id="366" parent="339" name="image">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="367" parent="339" name="badges_ibfk_1">
+      <ColNames>app_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>accounts</RefTableName>
+      <RefTableName>apps</RefTableName>
     </foreign-key>
-    <index id="354" parent="338" name="PRIMARY">
+    <index id="368" parent="339" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="355" parent="338" name="owner_id">
+    <index id="369" parent="339" name="app_id">
+      <ColNames>app_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="370" parent="339" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="371" parent="340" name="id">
+      <AutoIncrement>8</AutoIncrement>
+      <DasType>int(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="372" parent="340" name="auth_id">
+      <DasType>tinytext|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="373" parent="340" name="owner_id">
+      <DasType>varchar(7)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="374" parent="340" name="expiration">
+      <DasType>int(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="375" parent="340" name="password_resets_ibfk_1">
+      <ColNames>owner_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>accounts</RefTableName>
+    </foreign-key>
+    <index id="376" parent="340" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="377" parent="340" name="owner_id">
       <ColNames>owner_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="356" parent="338" name="PRIMARY">
+    <key id="378" parent="340" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="379" parent="341" name="id">
+      <DasType>varchar(7)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="380" parent="341" name="description">
+      <DasType>text|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="381" parent="341" name="public_avatar">
+      <DasType>tinyint(1)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="382" parent="341" name="public_display_name">
+      <DasType>tinyint(1)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="383" parent="341" name="profiles_ibfk_1">
+      <ColNames>id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>accounts</RefTableName>
+    </foreign-key>
+    <index id="384" parent="341" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="385" parent="341" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

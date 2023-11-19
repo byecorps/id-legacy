@@ -7,5 +7,7 @@
 ></script>
 <title><?php if (isset($doc_title)) { echo $doc_title." | "; } ?>ByeCorps ID</title>
 
+<link rel="shortcut icon" href="favicon.svg" type="image/svg">
+
 <link rel="stylesheet" href="/styles/global.css">
 <link rel="stylesheet" href="/fontawesome/css/all.css">
