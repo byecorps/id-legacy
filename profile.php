@@ -41,7 +41,7 @@ if ($_SESSION['id'] != $profile['id']) {
     <img src="<?= $avatar ?>" class="avatar" alt="Avatar">
     <div class="info">
         <div class="displayname"><?= $display_name ?></div>
-        <div class="bcid"><?= $profile['id'] ?></div>
+        <div class="bcid"><?= format_bcid( $profile['id'] ); ?></div>
     </div>
 </div>
 
