@@ -101,6 +101,11 @@ input[data-com-onepassword-filled="dark"] {
     margin: 0;
 }
 
+.flash {
+    background: var(--red-5);
+    color: black;
+}
+
 @media screen and (prefers-color-scheme: dark) {
     html {
         background: var(--background-dark, #121212);

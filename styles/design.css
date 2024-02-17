@@ -46,6 +46,11 @@ input:disabled {
   cursor: not-allowed;
 }
 
+.flash {
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
 table {
     background-color: var(--grey-2);
     width: 100%;

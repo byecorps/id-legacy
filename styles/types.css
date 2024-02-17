@@ -42,6 +42,12 @@ h2.subheading + h1 {
     font-family: 'Courier Prime', monospace;
 }
 
+p.subtitle {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
 .center {
     text-align: center;
 }

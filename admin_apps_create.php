@@ -13,7 +13,7 @@ function check_app_id($app_id): bool
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $app_id = generate_app_id();
-    db_execute("INSERT INTO apps (id, owner_id, title, description) VALUES (?, ?, ?, ?)", [$app_id, $_POST['owner'], $_POST['title'], $_POST['description']]);
+    db_execute("INSERT INTO apps (id, owner_id, title, description, type) VALUES (?, ?, ?, ?, ?)", [$app_id, $_POST['owner'], $_POST['title'], $_POST['description'], $_POST['type']]);
 	die();
 }
 
@@ -35,5 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			}
 		?>
 	</select>
+    <label for="type">App type</label>
+    <select name="type" id="type">
+        <option value="null">None</option>
+        <option value="basic_login">Basic login</option>
+    </select>
 	<button type="submit">Create app</button>
 </form>

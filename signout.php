@@ -2,6 +2,7 @@
 
 $_SESSION['id'] = null;
 $_SESSION['auth'] = false;
+setcookie('keep_me_logged_in', '', time()-3600);
 session_destroy();
 
 ?>
