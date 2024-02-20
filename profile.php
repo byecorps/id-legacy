@@ -11,7 +11,7 @@ $profile = db_execute("SELECT * FROM `profiles` WHERE id = ? LIMIT 1", [$user['i
 
 if (empty($profile)) {
     $profile = [
-            "id" => "0000000",
+            "id" => "9999999",
             "public_display_name" => false,
             "public_avatar" => false,
             "description" => null,

@@ -6,15 +6,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>Create table `accounts`";
         $stmt = $pdo->prepare('create table accounts
 (
-    id           varchar(7)                       not null
+    id           varchar(7)                             not null
         primary key,
-    email        text                             not null,
-    created_date date default current_timestamp() not null,
-    display_name text                             null,
-    password     text                             not null,
-    verified     tinyint(1) default 0             not null,
-    has_pfp      tinyint(1) default 0             not null,
-    is_admin     tinyint(1) default 0             not null,
+    email        text                                   not null,
+    created_date datetime default current_timestamp()   not null,
+    display_name text                                   null,
+    password     text                                   not null,
+    verified     tinyint(1) default 0                   not null,
+    has_pfp      tinyint(1) default 0                   not null,
+    is_admin     tinyint(1) default 0                   not null,
     constraint email
         unique (email) using hash
 );');
@@ -73,6 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             title       text    not null,
             description text,
             image       text    default "https://id.byecorps.com/assets/default.png"   not null,
+            type        text    null,
+            callback    text    null,
             constraint badges_ibfk_1 
                 foreign key (app_id) references apps (id)
             );');
@@ -89,8 +91,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             description         text        null,
             public_avatar       tinyint(1)  default 0,
             public_display_name tinyint(1)  default 0,
+            
             constraint profiles_ibfk_1 
                 foreign key (id) references accounts (id)
+            );');
+        } catch (PDOException $e) {
+            echo('<p>An error occurred: '. $e->getMessage() .'. Most likely this is already set.');
+        }
+
+        echo '<p>Create the `tokens` table';
+
+        try {
+            db_execute('create table tokens (
+            id                  int auto_increment  primary key,
+            access_token        text        unique,
+            refresh_token       text        null,
+            expiry              int         not null,
+            owner_id            varchar(7),
+            application_id      int(10)     null,
+            
+            constraint tokens_application_id
+                foreign key (application_id) references apps (id),
+            constraint tokens_owner_id
+                    foreign key (owner_id) references accounts (id)
             );');
         } catch (PDOException $e) {
             echo('<p>An error occurred: '. $e->getMessage() .'. Most likely this is already set.');

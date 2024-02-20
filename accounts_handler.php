@@ -25,7 +25,7 @@ function get_avatar_url($bcid):string {
 
 }
 
-function get_display_name($bcid, $use_bcid_fallback=true, $put_bcid_in_parenthesis=false):string {
+function get_display_name($bcid, $use_bcid_fallback=true, $put_bcid_in_parenthesis=false, $format_bcid=false):string {
 	$display_name = db_execute("SELECT display_name FROM accounts WHERE id = ?", [$bcid])['display_name'];
 	if (!empty($display_name)) {
         if ($put_bcid_in_parenthesis) {

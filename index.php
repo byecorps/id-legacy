@@ -176,10 +176,10 @@ if ($include == "login_external_basic.php") {
                 echo "<h2 class=\"subheading\">Admin</h2>";
             }
 
-	        if ($uri[0] == "admin" && !$user['is_admin']) {
-		        http_response_code(401);
-		        die("<img src='https://http.cat/401.jpg' alt='A cat standing in front of a door with a No Cats Allowed sign on it.' />");
-	        }
+//	        if ($uri[0] == "admin" && !$user['is_admin']) {
+//		        http_response_code(401);
+//		        die("<img src='https://http.cat/401.jpg' alt='A cat standing in front of a door with a No Cats Allowed sign on it.' />");
+//	        }
 
             if ($uri[0] == "docs") {
                 $include = "docs.php";

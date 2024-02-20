@@ -16,15 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // create a password reset
         $password_reset_link = create_password_reset($user['id']);
 
-        try {
-            $safe_display_name = format_bcid($user['id']);
-        } catch (Exception $e) {
-            die("Bad BCID.");
-        }
-
-        if ($user['display_name'] != '') {
-            $safe_display_name = $user['display_name'];
-        }
+        $safe_display_name = get_display_name($user['id'], use_bcid_fallback: true);
 
 
         try {
@@ -41,7 +33,7 @@ If you did not request this password reset, please ignore it (or tighten your ac
 
 //            echo("<a href='$password_reset_link'>This is a security issue.</a>");
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            echo "Message could not be sent. Mailer Error: $e";
         }
 
     } 
