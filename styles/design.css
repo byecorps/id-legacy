@@ -15,9 +15,9 @@ button, .button {
     cursor: pointer;
 }
 
-header a {
-    text-decoration: none;
-}
+/*header a {*/
+/*    text-decoration: underline;*/
+/*}*/
 
 /* inputs */
 
@@ -70,6 +70,23 @@ table > tbody > tr > td {
     background: var(--grey-0);
     border-radius: .5em;
     padding: .5em;
+}
+
+#connection_img {
+    display: flex;
+    gap: 1rem;
+
+    justify-content: center;
+}
+
+#connection_img img {
+    height:7.5rem;
+    border-radius: 50%;
+}
+
+#connection_img .sep {
+    font-size: 4rem;
+    align-self: center;
 }
 
 @media screen and (prefers-color-scheme: dark) {

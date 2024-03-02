@@ -29,11 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //        print_r($_POST);
 //        echo(is_string($_POST['keep_logged_in']));
 
-        if ($_POST['keep_logged_in'] == "on") {
-            $token = generate_cookie_access_token($user['id']);
+        if (array_key_exists('keep_logged_in', $_POST)) {
+            if ($_POST['keep_logged_in'] == "on") {
+                $token = generate_cookie_access_token($user['id']);
 //            print_r($token);
-            setcookie("keep_me_logged_in", $token['access']);
+                setcookie("keep_me_logged_in", $token['access']);
+            }
         }
+
 //
         if (isset($query['callback'])) {
             header("Location: ".$query['callback']);
@@ -57,14 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<div class='flash'>$message</div>";
     }?>
     <form class="login" method="post">
-        <input type="email" name="email" id="email" placeholder="Email" />
-        <input type="password" name="password" id="password" placeholder="Password" />
+        <input type="email" required name="email" id="email" placeholder="Email" />
+        <input type="password" required name="password" id="password" placeholder="Password" />
         <div class="checkbox"><input type="checkbox" name="keep_logged_in" id="keep_logged_in" />
             <label for="keep_logged_in">Keep me logged in (for 365 days)</label></div>
         <button class="primary" type="submit">Sign in</button>
     </form>
 
     <p class="center">
-        <a href="/forgot/password">Forgot password?</a> &bull; New? <a href="/register">Register</a> for a ByeCorps ID.
+        <a href="/forgot/password">Forgot password?</a> &bull; New? <a href="/signup">Sign up</a> for a ByeCorps ID.
     </p>
 </div>

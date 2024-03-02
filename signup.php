@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <h2>Sign up for ByeCorps ID</h2>
 <form method="post">
-    <input type="email" name="email" id="email" placeholder="Email">
-    <input type="password" name="password" id="password" placeholder="Password">
+    <input type="email" required name="email" id="email" placeholder="Email">
+    <input type="password" required name="password" id="password" placeholder="Password">
     <button type="submit">Sign up</button>
 </form>

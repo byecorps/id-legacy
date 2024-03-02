@@ -53,6 +53,19 @@ function api_health_check(): array
     return ["message" => "Science compels us to explode the sun!", "time" => time(), "response_code" => 200];
 }
 
+// Potentially authenticated image endpoints
+
+function get_avatar(): array
+{
+    if (!array_key_exists('id', $query)) {
+        return [
+            'response_code' => 404,
+            'message' => 'ID not assigned/found'
+        ];
+    }
+    $user_id = $query['id'];
+}
+
 // User (REQUIRES AUTHORISATION)
 
 function api_user_info() {
@@ -94,7 +107,10 @@ $api_routes = [ // base url is base_url.'/api'
     "/status" => "api_health_check",
 
     // Account stuff
-    "/account/me" => "api_user_info"
+    "/account/me" => "api_user_info",
+
+    // Get avatar
+    "/avatars/get" => "get_avatar"
 ];
 
 $path = str_replace("/api", "", $path);
@@ -107,7 +123,11 @@ if (isset($api_routes[$path])) {
             "message" => "Token expired or invalid."
         ]));
     }
-    echo json_encode($api_routes[$path]());
+    $response = $api_routes[$path]();
+    if (array_key_exists('response_code', $response)) {
+        http_response_code($response['response_code']);
+    }
+    echo json_encode($response);
 } else {
     http_response_code(404);
     echo (json_encode([

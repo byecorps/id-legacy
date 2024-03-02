@@ -9,10 +9,10 @@
 }
 
 body::after {
-    content: "Development: Subject To Change";
+    content: "BETA";
     position: fixed;
-    top: 4.5rem;
-    right: -1rem;
+    top: 5rem;
+    right: 1rem;
 
     text-align: right;
     font-size: 2.5rem;

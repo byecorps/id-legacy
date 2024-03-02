@@ -2,27 +2,14 @@
 // This file carries functions related to accounts.
 
 function get_avatar_url($bcid):string {
-	global $pdo;
 
-	$sql = "SELECT has_pfp FROM `accounts` WHERE id = ?";
+    $exists = db_execute('SELECT public FROM avatars WHERE id = ? LIMIT 1', [$bcid]);
 
-	try {
-		$stmt = $pdo -> prepare($sql);
-		$stmt->execute([$bcid]);
-		$has_pfp = $stmt->fetch();
-	} catch (PDOException $e) {
-		http_response_code(500);
-		die($e);
-	}
+    if (empty($exists)) {
+        return '/assets/default.png';
+    }
 
-	$appendix = "default.png";
-
-	if ($has_pfp['has_pfp']) {
-		$appendix = $bcid;
-	}
-
-	return 'https://cdn.byecorps.com/id/profile/'.$appendix;
-
+    return '/public/avatars/' . $bcid;
 }
 
 function get_display_name($bcid, $use_bcid_fallback=true, $put_bcid_in_parenthesis=false, $format_bcid=false):string {

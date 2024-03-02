@@ -10,6 +10,15 @@ function db_execute($sql, $variables=[]) {
 
 }
 
+function db_execute_all($sql, $variables=[]) {
+    global $pdo;
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($variables);
+    return $stmt->fetchAll();
+
+}
+
 function db_query($sql) {
 	global $pdo;
 

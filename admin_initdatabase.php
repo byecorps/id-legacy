@@ -119,6 +119,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo('<p>An error occurred: '. $e->getMessage() .'. Most likely this is already set.');
         }
 
+        echo '<p>Create the `tokens` table';
+
+        try {
+            db_query('CREATE TABLE `badge_owners` (
+  `badge_id` int(11) NOT NULL,
+  `owner_id` varchar(7) NOT NULL,
+  `earned` timestamp NULL DEFAULT current_timestamp(),
+  `info` text DEFAULT NULL COMMENT \'App may attach more info about how the badge was won (Killed "CoolGamer69 in battle!")\',
+      
+    constraint badges_owners_badge
+        foreign key (badge_id) references badges (id),
+    constraint badges_owners_owner
+            foreign key (owner_id) references accounts (id)
+);');
+        } catch (PDOException $e) {
+            echo('<p>An error occurred: ' . $e->getMessage() . '. Most likely this is already set.');
+        }
 
         echo "<p>Database initialised.</p>";
     }

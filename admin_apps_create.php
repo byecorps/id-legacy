@@ -23,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <form method="post">
 	<label for="title">Title</label>
-	<input type="text" name="title" id="title">
+	<input type="text" required name="title" id="title">
 	<label for="description">Description</label>
 	<textarea name="description" id="description" cols="30" rows="10"></textarea>
 	<label for="owner">App owner</label>
-	<select name="owner" id="owner">
+	<select name="owner" required id="owner">
 		<?php
 			$users = db_query("SELECT * FROM accounts");
 			foreach ($users as $row) {
@@ -36,10 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		?>
 	</select>
     <label for="type">App type</label>
-    <select name="type" id="type">
+    <select name="type" required id="type">
         <option value="null">None</option>
         <option value="basic_login">Basic login</option>
     </select>
+
+    <label for="app_icon">App icon</label>
+    <input type="file" id="app_icon" name="app_icon" />
+
     <label for="callback">Callback</label>
     <input type="url" id="callback" name="callback" />
 	<button type="submit" class="primary">Create app</button>

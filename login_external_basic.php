@@ -96,9 +96,14 @@ login:
     <main>
         <div id="loginform">
             <?php if ("" != $error) {goto error_no_app;} ?>
-            <h1>Sign into <?= $app['title'] ?></h1>
+            <div id="connection_img">
+                <img src="<?= get_avatar_url($_SESSION['id']) ?>" alt="<?= htmlspecialchars($user['display_name']) ?>'s avatar" />
+                <span class="sep">×</span>
+                <img src="<?= $app['icon'] ?>" alt="<?= htmlspecialchars($user['title']) ?>'s avatar" />
+            </div>
+            <h1>Sign into <?= htmlspecialchars($app['title']) ?></h1>
             <p class="subtitle">Owned by <strong><?= get_display_name($app['owner_id'], put_bcid_in_parenthesis: true) ?></strong></p>
-            <p><?= $app['description'] ?></p>
+<!--            <p>--><?php //= htmlspecialchars($app['description']) ?><!--</p>-->
             <?php
             error_no_app:
             if ($error) {

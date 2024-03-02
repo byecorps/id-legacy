@@ -118,14 +118,17 @@ $paths = array(
     "/admin/list/accounts" => ["admin_accounts.php"],
     "/admin/list/apps" => ["admin_apps.php"],
     "/admin/create/app" => ["admin_apps_create.php"],
+    "/admin/signinas" => ["signinas.php"],
     "/admin/purge" => ["admin_purge.php"],
 
-    "/account" => ["account.php", "Your account"],
+    // Settings
+    "/dashboard" => ["dashboard.php", "Dashboard", true],
+
+    "/account" => ["account.php", "Your account", true],
     "/signin" => ["signin.php", "Sign in"],
     "/signup" => ["signup.php", "Sign up"],
-    "/signout" => ["signout.php", "Signed out"],
+    "/signout" => ["signout.php", "Signed out". false, true],
     "/forgot/password" => ["forgot_password.php", "Forgot password"],
-    "/admin/signinas" => ["signinas.php"],
     "/reset/password" => ["reset_password.php", "Reset password"],
     "/docs" => ["docs.php", "Docs"],
     "/credits" => ["credits.php", "Credits"],
@@ -139,12 +142,21 @@ if (!empty($uri) ) { // Go to jail. Go directly to jail. Do not pass Go.
         include("api_handler.php");
         exit(); // fuck this shit i'm out
     }
+    if ($uri[0] == "public" && $uri[1] == "avatars") {
+        include("image_grabber.php");
+        exit();
+    }
 }
 
 if (isset($paths[$path])) {
     $include = $paths[$path][0];
     if (isset($paths[$path][1])) {
         $doc_title = $paths[$path][1];
+    }
+    if (array_key_exists(3, $paths[$path])) {
+        if ($paths[$path][3]) {
+            goto skip_formalities;
+        }
     }
 }
 
@@ -167,8 +179,7 @@ if ($include == "login_external_basic.php") {
 <body>
     <?php include("header.php"); ?>
     <main>
-        <?php 
-
+        <?php
         if (!empty($uri)) {
 //            print_r ($uri);
 
@@ -187,7 +198,8 @@ if ($include == "login_external_basic.php") {
         }
 
         skip_formalities:
-        include($include); ?>
+        include($include);
+        ?>
     </main>
     <?php include("footer.php"); ?>
 </body>

@@ -1,7 +1,7 @@
 /* This file deals with font types and font families. */
 
 @import url(https://fonts.bunny.net/css?family=montserrat:400,400i,600,600i,700,700i,900,900i);
-@import url(https://fonts.bunny.net/css2?family=courier+prime:wght@400;700&display=swap); /* for BCIDs */
+@import url(https://fonts.bunny.net/css2?family=Space+Mono:wght@400;700&display=swap); /* for BCIDs */
 
 @import url(/fontawesome/css/all.css);
 
@@ -39,10 +39,10 @@ h2.subheading + h1 {
 }
 
 .bcid {
-    font-family: 'Courier Prime', monospace;
+    font-family: 'Space Mono', monospace;
 }
 
-p.subtitle {
+.subtitle {
     font-size: 0.9rem;
     margin: 0;
     opacity: 0.8;
@@ -59,3 +59,28 @@ p.subtitle {
 .icon-false::before {
     content: "\f00d";
 }
+
+.space-mono-regular {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.space-mono-regular-italic {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.space-mono-bold {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.space-mono-bold-italic {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-style: italic;
+}
+
