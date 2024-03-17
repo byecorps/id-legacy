@@ -7,6 +7,8 @@ if (array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
     $access_token = str_replace("Bearer ", "", $_SERVER['HTTP_AUTHORIZATION']);
 }
 
+
+
 if (!empty($access_token)) {
     // Check who the access token belongs to
     $token = db_execute("SELECT * FROM tokens WHERE access_token = ?", [$access_token]);
@@ -30,12 +32,23 @@ function check_authorisation($token): int
     $token_row = db_execute("SELECT * FROM tokens WHERE access_token = ?", [$token]);
 
     if (null == $token_row) {
-        return 0;
+        if (array_key_exists('auth', $_SESSION)) {
+            if ($_SESSION['auth']) {
+                $token_row = [
+                    "type" => "dangerous"
+                ];
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
     }
 
     return match ($token_row['type']) {
-        "basic" => 1,
-        default => 0,
+        "dangerous" => 22,
+        "basic"     => 1,
+        default     => 0,
     };
 }
 
@@ -64,11 +77,13 @@ function get_avatar(): array
         ];
     }
     $user_id = $query['id'];
+    return [];
 }
 
 // User (REQUIRES AUTHORISATION)
 
-function api_user_info() {
+function api_user_info(): array
+{
     global $access_token, $token_owner;
     // Authorisation levels:
     // `display_name`   = 1 (basic)
@@ -86,9 +101,7 @@ function api_user_info() {
     if (null != $data) {
         return [
             "response_code" => 200,
-            "id" => $data['id'],
-            "email" => $data['email'],
-            "display_name" => $data['display_name']
+            "data" => $data
         ];
     }
 
