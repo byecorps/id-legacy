@@ -3,6 +3,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 session_start();
 
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 if (empty($_SESSION)) {
     $_SESSION['auth'] = false;
 }
@@ -124,10 +126,10 @@ $paths = array(
     // Settings
     "/dashboard" => ["dashboard.php", "Dashboard", true],
 
-    "/account" => ["account.php", "Your account", true],
+    "/account" => ["account.php", "Your account"],
     "/signin" => ["signin.php", "Sign in"],
     "/signup" => ["signup.php", "Sign up"],
-    "/signout" => ["signout.php", "Signed out". false, true],
+    "/signout" => ["signout.php", "Signed out"],
     "/forgot/password" => ["forgot_password.php", "Forgot password"],
     "/reset/password" => ["reset_password.php", "Reset password"],
     "/docs" => ["docs.php", "Docs"],
@@ -148,15 +150,14 @@ if (!empty($uri) ) { // Go to jail. Go directly to jail. Do not pass Go.
     }
 }
 
+$migrated = false;
 if (isset($paths[$path])) {
     $include = $paths[$path][0];
     if (isset($paths[$path][1])) {
         $doc_title = $paths[$path][1];
     }
-    if (array_key_exists(3, $paths[$path])) {
-        if ($paths[$path][3]) {
-            goto skip_formalities;
-        }
+    if (isset($paths[$path][2])) {
+        $migrated = $paths[$path][2];
     }
 }
 
@@ -165,10 +166,12 @@ else {
     http_response_code(404);
 }
 
-if ($include == "login_external_basic.php") {
-    goto skip_formalities;
-}
 
+if ($migrated) {
+    $output = "";
+
+    include($include);
+}
 ?>
 
 <!DOCTYPE html>
@@ -197,8 +200,12 @@ if ($include == "login_external_basic.php") {
             }
         }
 
-        skip_formalities:
-        include($include);
+        if ($migrated) {
+            echo $output;
+        }
+        else {
+            include ($include);
+        }
         ?>
     </main>
     <?php include("footer.php"); ?>

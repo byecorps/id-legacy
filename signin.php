@@ -1,7 +1,7 @@
 <?php 
 
 if ($_SESSION['auth']) {
-    header('Location: /account');
+    header('Location: /profile');
 }
 
 if (isset($query['callback'])) {
