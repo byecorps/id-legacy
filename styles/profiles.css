@@ -1,5 +1,5 @@
 
-#profile {
+#mini_profile {
     display: flex;
     gap: 1rem;
     padding: 1rem;
@@ -12,18 +12,18 @@
     background: var(--grey-0);
 }
 
-#profile > .avatar {
+#mini_profile > .avatar {
     height: 150px;
 
     border-radius: 1em;
 }
 
-#profile > .info > .displayname {
+#mini_profile > .info > .displayname {
     font-size: 2.5rem;
     font-weight: bolder;
 }
 
-#profile > .info > .bcid {
+#mini_profile > .info > .bcid {
     font-size: 1.5rem;
 }
 
@@ -63,7 +63,7 @@
 }
 
 @media screen and (prefers-color-scheme: dark) {
-    #profile {
+    #mini_profile {
         background: var(--grey-9);
     }
 }

@@ -125,6 +125,7 @@ $paths = array(
 
     // Settings
     "/dashboard" => ["dashboard.php", "Dashboard", true],
+    "/settings" => ["settings.php", "Settings"],
 
     "/account" => ["account.php", "Your account"],
     "/signin" => ["signin.php", "Sign in"],

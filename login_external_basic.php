@@ -86,14 +86,7 @@ login:
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <?php include ("head.php"); ?>
-</head>
-<body>
-    <?php include("header.php"); ?>
-    <main>
+<main>
         <div id="loginform">
             <?php if ("" != $error) {goto error_no_app;} ?>
             <div id="connection_img">

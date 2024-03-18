@@ -14,6 +14,7 @@ if (!empty($access_token)) {
     $token = db_execute("SELECT * FROM tokens WHERE access_token = ?", [$access_token]);
     // if the token doesn't exist...
     if (empty($token)) {
+
         $invalid_token = true; // We won't tell this to the end-user immediately because I'd prefer to tell them about
                                 // 404 first.
     } else {
@@ -21,10 +22,12 @@ if (!empty($access_token)) {
     }
 }
 
-function check_authorisation($token): int
+function check_authorisation($token=""): int
 {
+    global $token_owner;
     // Validate token
-    if (!validate_access_token($token)) {
+    if (!validate_access_token($token) && "" != $token) {
+        echo "invalid";
         return 0; // Unauthorised
     }
 
@@ -37,6 +40,7 @@ function check_authorisation($token): int
                 $token_row = [
                     "type" => "dangerous"
                 ];
+                $token_owner = $_SESSION['id'];
             } else {
                 return 0;
             }
@@ -94,8 +98,11 @@ function api_user_info(): array
 
     $data = null;
 
-    if ($level == 1) {
+    if ($level >= 1) {
         $data = db_execute("SELECT id, email, display_name FROM accounts WHERE id = ? LIMIT 1", [$token_owner]);
+    } if ($level == 22) {
+        $data = db_execute("SELECT * FROM accounts WHERE id = ? LIMIT 1", [$token_owner]);
+        unset($data['password']);
     }
 
     if (null != $data) {

@@ -1,0 +1,69 @@
+
+#settings_split {
+    display: grid;
+
+    grid-template-columns: 1fr 4fr;
+}
+
+#mini_profile {
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 1.5rem;
+    overflow: clip;
+}
+
+#mini_profile .image_container {
+    display: flex;
+    background: linear-gradient(to bottom, white, var(--background) 90%);
+}
+
+#mini_profile .image_container img {
+    width: 50%;
+    margin: 0.5rem auto auto;
+    padding-top: 0.5rem;
+    border-radius: 1rem;
+}
+
+#mini_profile .texts {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 1rem;
+}
+
+#mini_profile .texts .displayname {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#settings_list {
+    list-style: none;
+}
+
+#settings_list > h1 {
+    margin: 0 0 1rem 0;
+}
+
+#settings_list li {
+    border-top: var(--foreground) 1px solid;
+}
+
+#settings_list li:first-child {
+    border-top: none;
+}
+
+#settings_list li > a {
+    display: block;
+    padding: 1rem 0;
+
+    color: var(--foreground);
+    text-decoration: none;
+
+    transition: color 0.2s ease-in-out;
+}
+
+#settings_list li > a:hover {
+    color: var(--flax)
+}

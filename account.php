@@ -77,7 +77,7 @@ if (isset($message )) {
 ?>
 
 <div id="wrapper">
-    <div id="profile">
+    <div id="mini_profile">
         <img src="<?= get_gravatar_url($user['email']); ?>">
         <div class="details">
             <span class="displayname"><?= $user['display_name'] ?></span>
