@@ -124,7 +124,7 @@ $paths = array(
     "/admin/purge" => ["admin_purge.php"],
 
     // Settings
-    "/dashboard" => ["dashboard.php", "Dashboard", true],
+    "/dashboard" => ["dashboard.php", "Dashboard"],
     "/settings" => ["settings.php", "Settings"],
 
     "/account" => ["account.php", "Your account"],

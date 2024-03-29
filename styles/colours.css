@@ -30,6 +30,8 @@
     --foreground: black;
     --foreground-dark: white;
 
+    --chip-background: var(--grey-0);
+
     color-scheme: light dark;
 }
 
@@ -113,6 +115,8 @@ input[data-com-onepassword-filled="dark"] {
     :root {
         --background: #121212;
         --foreground: white;
+
+        --chip-background: var(--grey-9);
 
         color-scheme: light dark;
     }

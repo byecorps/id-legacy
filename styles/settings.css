@@ -1,8 +1,12 @@
 
+main {
+    display: flex;
+}
+
 #settings_split {
     display: grid;
-
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
 }
 
 #mini_profile {
@@ -11,17 +15,20 @@
 
     border-radius: 1.5rem;
     overflow: clip;
+
+    padding-bottom: 1.5rem;
+
+    background: var(--background);
 }
 
 #mini_profile .image_container {
     display: flex;
-    background: linear-gradient(to bottom, white, var(--background) 90%);
+    background: linear-gradient(to bottom, white, var(--background) 95%);
 }
 
 #mini_profile .image_container img {
     width: 50%;
-    margin: 0.5rem auto auto;
-    padding-top: 0.5rem;
+    margin: 0.5rem auto 0.5rem;
     border-radius: 1rem;
 }
 
@@ -29,8 +36,6 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-
-    padding-top: 1rem;
 }
 
 #mini_profile .texts .displayname {
@@ -67,3 +72,69 @@
 #settings_list li > a:hover {
     color: var(--flax)
 }
+
+.tiles {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 150px;
+    grid-auto-flow: dense;
+}
+
+.tiles .tile {
+    background: #343a40;
+    text-align: center;
+    display: flex;
+    text-decoration: none;
+
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    border-radius: 1.5rem;
+
+    transition: scale 0.2s ease-in-out;
+}
+
+.tiles .tile:hover {
+    scale: 1.05;
+}
+
+.tiles .tile div {
+    margin: auto;
+}
+
+.tiles .tile span {
+    display: block;
+}
+
+.tile.double-height {
+    grid-row: span 2;
+}
+
+@media screen and (max-width: 960px) {
+    #settings_split {
+        grid-template-columns: none;
+    }
+
+    #mini_profile {
+        flex-direction: row;
+        padding-bottom: 0;
+    }
+
+    #mini_profile .image_container {
+        width: 40%;
+        background: linear-gradient(to right, white, var(--chip-background) 95%);
+    }
+
+    #mini_profile .image_container img {
+        margin: 1rem;
+        border-radius: 1rem;
+    }
+
+    #mini_profile .texts {
+        flex: 1;
+        margin: auto auto auto 0;
+        text-align: left;
+    }
+}
+
