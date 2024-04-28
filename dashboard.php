@@ -26,7 +26,7 @@ if (!$_SESSION['auth']) {
         </div>
     </div>
     <div class='right tiles'>
-        <a href="/settings" class="tile double-height">
+        <a href="/settings" class="tile">
             <div class="wrapper"> <!-- SUPERIMPORTANTBECAUSE IM BAD AT CSS -->
                 <span class="fa-solid fa-cog icon"></span>
                 <span class="text">Settings</span>

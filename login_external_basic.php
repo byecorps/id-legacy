@@ -86,7 +86,6 @@ login:
 
 ?>
 
-<main>
         <div id="loginform">
             <?php if ("" != $error) {goto error_no_app;} ?>
             <div id="connection_img">
