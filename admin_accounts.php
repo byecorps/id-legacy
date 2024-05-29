@@ -21,9 +21,9 @@ $count = $count_req->fetchColumn();
 <ul>
     <?php
     foreach ($result as $row) {
-        echo "<li><pre>";
-        print_r($row);
-        echo "</pre><p><a href='/admin/signinas?id=".$row['id']."'>Sign in as ".$row['display_name']."</a></li>";
+        echo "<li>";
+        echo $row['id'];
+        echo "<p><a href='/admin/signinas?id=".$row['id']."'>Sign in as ".htmlspecialchars($row['display_name'])."</a></li>";
     }
     ?>
 </ul>

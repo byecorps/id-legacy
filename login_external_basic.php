@@ -31,9 +31,29 @@ if ($query['callback'] != $app['callback']) {
     goto login;
 }
 
+if ($_SESSION['auth'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
+    // We can check if there's already a valid token of the same level and just pass that on instead.
+    $valid_tokens = db_execute_all("SELECT * FROM tokens WHERE owner_id = ? AND type = ? AND application_id = ? AND expiry > ?",
+        [$_SESSION['id'], "basic", $app_id, time()]);
+
+    if (sizeof($valid_tokens) > 0) {
+        print_r($valid_tokens);
+
+        $token = $valid_tokens[0];
+
+        header('Location: '. $_GET['callback'].'?access_token='.$token['access_token'].'&refresh='.$token['refresh_token']
+                .'&expiry='.$token['expiry']);
+        exit();
+    }
+
+//    if (validate_access_token())
+
+
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Here's a few easy steps to figure out if we should give the other party a token or not.
-    print_r($_POST);
+//    print_r($_POST);
 
     // First: match the session ids. If they aren't the same it's probably Not Ok.
     if (session_id() != $_POST['sessionid']) {
@@ -74,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // The following gets run assuming we know the client is the one CLICKING the button.
-    $tokens = generate_basic_access_token($_POST['bcid']);
+    $tokens = generate_basic_access_token($_POST['bcid'], $app_id);
 
     header('Location: '. $_POST['callback'].'?access_token='.$tokens['access'].'&refresh='.$tokens['refresh']
                                 .'&expiry='.$tokens['expiry']);
@@ -94,15 +114,15 @@ login:
                 <img src="<?= $app['icon'] ?>" alt="<?= htmlspecialchars($user['title']) ?>'s avatar" />
             </div>
             <h1>Sign into <?= htmlspecialchars($app['title']) ?></h1>
-            <p class="subtitle">Owned by <strong><?= get_display_name($app['owner_id'], put_bcid_in_parenthesis: true) ?></strong></p>
+            <p class="subtitle">Owned by <strong><?= htmlspecialchars( get_display_name($app['owner_id'], put_bcid_in_parenthesis: true) ) ?></strong></p>
 <!--            <p>--><?php //= htmlspecialchars($app['description']) ?><!--</p>-->
             <?php
             error_no_app:
             if ($error) {
                 http_response_code($error[1]);
                 echo "
-<div class='error center'>
-<span class='fa-regular fa-2xl center fa-xmark-circle'></span>
+<div class='error center vertical-center'>
+<span class='fg-error fa-regular fa-2xl center fa-xmark-circle'></span>
 <h2>Something went wrong!</h2>
 <p>Server returned error:<br /><code>$error[0]</code> (HTTP response code $error[1])</p>
 </div>
@@ -110,9 +130,9 @@ login:
                 goto dont_show_form;
             }
             ?>
-            <p><strong><?= $app['title'] ?></strong> uses ByeCorps ID for authentication.</p>
+            <p><strong><?= htmlspecialchars($app['title']) ?></strong> uses ByeCorps ID for authentication.</p>
             <p>Please double-check the information and avoid signing in with your BCID if you do not trust this app.</p>
-            <p>Please confirm that you'd like to sign into <strong><?= $app['title'] ?></strong>.</p>
+            <p>Please confirm that you'd like to sign into <strong><?= htmlspecialchars($app['title']) ?></strong>.</p>
             <?php
             if (null != $flash) {
                 echo "<p class='flash'>$flash</p>";
@@ -131,11 +151,10 @@ login:
                 <input type="email" autocomplete="email" name="email" id="email" placeholder="Email" />
                 <input type="password" name="password" id="password" placeholder="Password" />
                 <?php signedin: ?>
-                <button class="primary" type="submit">Sign into <?= $app['title']; ?></button>
-                <button class="secondary" type="reset">GET ME OUT OF HERE</button>
+                <button class="primary" type="submit">Sign into <?= htmlspecialchars($app['title']) ?></button>
                 <p class="subtitle center">
-                    You will be brought to <strong><?= $query['callback'] ?></strong>.
-                    <br /><?= $app['title'] ?> will be able to see your email and display name.
+                    You will be brought to <strong><?= htmlspecialchars($query['callback']) ?></strong>.
+                    <br /><strong><?= htmlspecialchars($app['title']) ?></strong> will be able to see your email and display name.
                 </p>
                 <input type="hidden" name="callback" value="<?= $query['callback'] ?>" />
             </form>

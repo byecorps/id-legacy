@@ -52,6 +52,10 @@ h2.subheading + h1 {
     text-align: center;
 }
 
+.vertical-center {
+    vertical-align: center;
+}
+
 .icon-true::before {
     content: "\f00c";
 }

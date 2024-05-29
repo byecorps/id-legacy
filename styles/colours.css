@@ -24,6 +24,8 @@
     --grey-8: #343a40;
     --grey-9: #212529;
 
+    --error-color: var(--red-5);
+
     --background: white;
     --background-dark: #121212;
 
@@ -109,6 +111,10 @@ input[data-com-onepassword-filled="dark"] {
 .flash {
     background: var(--red-5);
     color: black;
+}
+
+.fg-error {
+    color: var(--error-color);
 }
 
 @media screen and (prefers-color-scheme: dark) {

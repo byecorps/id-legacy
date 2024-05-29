@@ -1,4 +1,12 @@
 
+#profile {
+    display: flex;
+}
+
+#profile .avatar {
+    height: 150px;
+}
+
 #mini_profile {
     display: flex;
     gap: 1rem;

@@ -120,12 +120,14 @@ $paths = array(
     "/admin/list/accounts" => ["admin_accounts.php"],
     "/admin/list/apps" => ["admin_apps.php"],
     "/admin/create/app" => ["admin_apps_create.php"],
+    "/admin/create/token" => ["admin_create_token.php"],
     "/admin/signinas" => ["signinas.php"],
     "/admin/purge" => ["admin_purge.php"],
 
     // Settings
     "/dashboard" => ["dashboard.php", "Dashboard"],
     "/settings" => ["settings.php", "Settings"],
+    "/settings/account" => ["settings_account.php", "Settings -> Account"],
 
     "/account" => ["account.php", "Your account"],
     "/signin" => ["signin.php", "Sign in"],

@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['keep_logged_in'] == "on") {
                 $token = generate_cookie_access_token($user['id']);
 //            print_r($token);
-                setcookie("keep_me_logged_in", $token['access']);
+                setcookie("keep_me_logged_in", $token['access'], time()+606024*365);
             }
         }
 
