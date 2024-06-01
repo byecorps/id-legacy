@@ -1,7 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 if ($_SESSION['auth']) {
     header('Location: /account');
@@ -19,41 +16,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // create a password reset
         $password_reset_link = create_password_reset($user['id']);
 
-        try {
-            $safe_display_name = format_bcid($user['id']);
-        } catch (Exception $e) {
-            die("Bad BCID.");
-        }
+        $safe_display_name = get_display_name($user['id'], use_bcid_fallback: true);
 
-        if ($user['display_name'] != '') {
-            $safe_display_name = $user['display_name'];
-        }
-
-        $mail = new PHPMailer();
 
         try {
-            //Server settings
-//            $mail->SMTPDebug = SMTP::DEBUG_SERVER; Verbose output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = MAIL_HOST;                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = MAIL_USERNAME;                     //SMTP username
-            $mail->Password   = MAIL_PASSWORD;                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;
-
-            $mail->setFrom('id@byecorps.com', 'ByeCorps ID');
-            $mail->addAddress($user['email'], $safe_display_name);
-            $mail->addReplyTo('hello@byecorps.com', 'ByeCorps Support');
-
-            $mail->Subject = 'Reset your password';
-            $mail->Body    = 'Hey there '.$safe_display_name.'! Here is that password reset you requested. Just click the following link and you\'ll be sorted:
+            $resend->emails->send([
+                'from' => 'ByeCorps ID <noreply@id.byecorps.com>',
+                'to' => [$safe_display_name . "<" . $user['email']. ">"],
+                'subject' => 'Reset your password',
+                'text' => 'Hey there '.$safe_display_name.'! Here is that password reset you requested. Just click the following link and you\'ll be sorted:
 '.$password_reset_link.'
-This link expires in 5 minutes.';
 
-            $mail->send();
+This link expires in 5 minutes.
+
+If you did not request this password reset, please ignore it (or tighten your account\'s security)']);
+
+//            echo("<a href='$password_reset_link'>This is a security issue.</a>");
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            echo "Message could not be sent. Mailer Error: $e";
         }
 
     } 
@@ -65,7 +45,7 @@ This link expires in 5 minutes.';
 
 <?php if(isset($message)) echo "<p>".$message."</p>"; ?>
 
-<p>Forgot your password? We'll send you an email to reset it.</p>
+<p>Forgot your password? We'll email you to reset it.</p>
 
 <form method="post">
     <input placeholder="a.dent@squornshellous.cloud" name="email" id="email" type="email">

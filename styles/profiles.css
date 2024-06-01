@@ -1,6 +1,14 @@
 
 #profile {
     display: flex;
+}
+
+#profile .avatar {
+    height: 150px;
+}
+
+#mini_profile {
+    display: flex;
     gap: 1rem;
     padding: 1rem;
     width: 750px;
@@ -12,18 +20,18 @@
     background: var(--grey-0);
 }
 
-#profile > .avatar {
+#mini_profile > .avatar {
     height: 150px;
 
     border-radius: 1em;
 }
 
-#profile > .info > .displayname {
+#mini_profile > .info > .displayname {
     font-size: 2.5rem;
     font-weight: bolder;
 }
 
-#profile > .info > .bcid {
+#mini_profile > .info > .bcid {
     font-size: 1.5rem;
 }
 
@@ -32,8 +40,38 @@
     grid-template-columns: 3fr 1fr;
 }
 
+#badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    gap: 0.5rem;
+}
+
+#badges .badge {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+}
+
+.badge .details {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge img {
+    height: 7.5em;
+    width: 7.5em;
+    object-fit: contain;
+    border-radius: 1em;
+}
+
+.badge .details .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 @media screen and (prefers-color-scheme: dark) {
-    #profile {
+    #mini_profile {
         background: var(--grey-9);
     }
 }

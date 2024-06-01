@@ -77,8 +77,8 @@ if (isset($message )) {
 ?>
 
 <div id="wrapper">
-    <div id="profile">
-        <img src="<?= get_avatar_url($user['id']); ?>">
+    <div id="mini_profile">
+        <img src="<?= get_gravatar_url($user['email']); ?>">
         <div class="details">
             <span class="displayname"><?= $user['display_name'] ?></span>
             <span class="bcid"><?= format_bcid($user['id']); ?></span>

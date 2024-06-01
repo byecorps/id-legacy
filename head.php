@@ -7,7 +7,15 @@
 ></script>
 <title><?php if (isset($doc_title)) { echo $doc_title." | "; } ?>ByeCorps ID</title>
 
-<link rel="shortcut icon" href="favicon.svg" type="image/svg">
+<link rel="shortcut icon" href="/favicon.svg" type="image/svg" />
 
-<link rel="stylesheet" href="/styles/global.css">
-<link rel="stylesheet" href="/fontawesome/css/all.css">
+<link rel="manifest" href="manifest.json" />
+
+<!-- 0_o -->
+
+<link rel="apple-touch-icon" href="/assets/icons/apple-icon-180.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link rel="stylesheet" href="/styles/global.css" />
+<link rel="stylesheet" href="/fontawesome/css/all.css" />

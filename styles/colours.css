@@ -24,8 +24,15 @@
     --grey-8: #343a40;
     --grey-9: #212529;
 
+    --error-color: var(--red-5);
+
     --background: white;
     --background-dark: #121212;
+
+    --foreground: black;
+    --foreground-dark: white;
+
+    --chip-background: var(--grey-0);
 
     color-scheme: light dark;
 }
@@ -101,9 +108,27 @@ input[data-com-onepassword-filled="dark"] {
     margin: 0;
 }
 
+.flash {
+    background: var(--red-5);
+    color: black;
+}
+
+.fg-error {
+    color: var(--error-color);
+}
+
 @media screen and (prefers-color-scheme: dark) {
+    :root {
+        --background: #121212;
+        --foreground: white;
+
+        --chip-background: var(--grey-9);
+
+        color-scheme: light dark;
+    }
+
     html {
-        background: var(--background-dark, #121212);
+        background: var(--background, #121212);
     }
 
     button.primary, .button.primary {
@@ -121,7 +146,6 @@ input[data-com-onepassword-filled="dark"] {
     }
 
     input, textarea {
-
         background-color: #2c2c2c77;
     }
 

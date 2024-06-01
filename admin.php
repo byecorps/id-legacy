@@ -18,6 +18,11 @@
     </li>
 </ul>
 
+<h2>API</h2>
+<ul>
+    <li><a href="/admin/create/token">Token generator</a></li>
+</ul>
+
 <h2>Init</h2>
 <ul>
 	<li>

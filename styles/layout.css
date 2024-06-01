@@ -148,3 +148,8 @@ form {
     display: flex;
 }
 
+#loginform {
+    max-width: 500px;
+    margin: auto;
+}
+
