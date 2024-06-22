@@ -111,7 +111,7 @@ login:
             <div id="connection_img">
                 <img src="<?= get_avatar_url($_SESSION['id']) ?>" alt="<?= htmlspecialchars($user['display_name']) ?>'s avatar" />
                 <span class="sep">×</span>
-                <img src="<?= $app['icon'] ?>" alt="<?= htmlspecialchars($user['title']) ?>'s avatar" />
+                <img src="<?= $app['icon'] ?>" alt="<?= htmlspecialchars($app['title']) ?>" />
             </div>
             <h1>Sign into <?= htmlspecialchars($app['title']) ?></h1>
             <p class="subtitle">Owned by <strong><?= htmlspecialchars( get_display_name($app['owner_id'], put_bcid_in_parenthesis: true) ) ?></strong></p>
