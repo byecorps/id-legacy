@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 This link expires in 5 minutes.
 
-If you did not request this password reset, please ignore it (or tighten your account\'s security)']);
+If you did not request this password reset, please ignore this email.']);
 
 //            echo("<a href='$password_reset_link'>This is a security issue.</a>");
         } catch (Exception $e) {
