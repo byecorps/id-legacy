@@ -1,0 +1,13 @@
+
+:root {
+    /* ByeCorps colour scheme. Use sparsely on this site. */
+    --byecorps-blue: #1b5652;
+    --byecorps-white: #e6feff;
+
+    /* ByeCorps ID colour scheme. Use on this site. */
+    --black-bean: #330f0a;
+    --dark-slate-gray: #394f49;
+    --fern-green: #65743a;
+    --flax: #efdd8d;
+    --mindaro: #f4fdaf;
+}

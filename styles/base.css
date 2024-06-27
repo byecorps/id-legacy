@@ -1,0 +1,52 @@
+
+@import "colours.css";
+
+:root {
+    color-scheme: light dark;
+    font-family: "Montserrat", system-ui, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+    gap: 1rem;
+
+    justify-content: space-between;
+
+    background: var(--flax);
+    color: var(--dark-slate-gray);
+}
+
+main {
+    flex: 1;
+}
+
+#content {
+    margin: 1rem;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    header {
+        background: var(--dark-slate-gray);
+        color: var(--flax);
+    }
+}
+
+/* Font things */
+.bc-1 {
+    font-weight: 700;
+}
+
+.bc-2 {
+    font-weight: 600;
+}
+
+.bc-3 {
+    font-weight: 400;
+}
