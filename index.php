@@ -1,8 +1,10 @@
 <?php
 
+$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
+
 // Includes
 try {
-    require "config.php";
+    require_once "config.php";
 } catch (Error $e) {
     echo "<b>Critical error:</b> " . $e->getMessage() . "<br />This isn't your fault. Please contact the developers.";
     exit;
@@ -15,32 +17,53 @@ try {
     echo "<b>Critical error:</b> " . $e->getMessage() . "<br />";
 }
 
+require_once 'strings/en.php'; // This ensures strings will fallback to English if one is missing.
+
+require_once 'common/strings.php';
+require_once 'common/account_utils.php';
+require_once 'common/database.php';
+
 // Starts the session
-// TODO: write this to use the database to work across more than one server
+// TODO: write this to use the database to work across more than one server (e.g. don't use PHP sessions)
 session_start();
 
+$user = null;
+
+if ($_SESSION['auth']) {
+    $user = get_user_by_id($_SESSION['id']);
+}
 
 $uri_string = $_SERVER['REQUEST_URI'];  // `/foo/bar?bar=foo&foo=bar`
 $uri_explode = explode('?', $uri_string);
-$path = $uri_explode[0]; // `/foo/bar`
-$path_array = explode('/', $path);
+$path_raw = $uri_explode[0]; // `/foo/bar`
+$path = explode('/', $path_raw);
 
 // Remove trailing slashes
-if (str_ends_with($path, '/') && $path != '/') {
+if (str_ends_with($path_raw, '/') && $path_raw != '/') {
     http_response_code(308);
-    header('Location: '.substr($path,0, -1));
+    header('Location: '.substr($path_raw,0, -1));
     exit;
 }
 
 $routes = [
     '' => function () { require 'views/home.php'; },
-    'api' => function () { require 'api.php'; /* Handoff further routing to API script. */ }
+    'api' => function () { require 'api.php'; /* Handoff further routing to API script. */ },
+    'profile' => function () {
+        global $path, $user, $profile_owner; // don't forget this lol
+
+        if (isset($path[2])) {
+            $profile_owner = $path[2];
+            $profile_owner = get_user_by_id($profile_owner);
+        } else {
+            $profile_owner = $user;
+        }
+
+        require 'views/profile.php';
+    },
 ];
 
-//print_r($path_array);
-
-if (array_key_exists($path_array[1], $routes)) {
-    $res = $routes[$path_array[1]]();
+if (array_key_exists($path[1], $routes)) {
+    $res = $routes[$path[1]]();
     if ($res == 404) {
         require "views/404.php";
     }
