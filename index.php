@@ -8,7 +8,12 @@ try {
     exit;
 }
 
-// TODO: Init PDO.
+// Connect to database
+try {
+    $pdo = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD, PDO_OPTIONS);
+} catch (PDOException $e) {
+    echo "<b>Critical error:</b> " . $e->getMessage() . "<br />";
+}
 
 // Starts the session
 // TODO: write this to use the database to work across more than one server
@@ -29,6 +34,7 @@ if (str_ends_with($path, '/') && $path != '/') {
 
 $routes = [
     '' => function () { require 'views/home.php'; },
+    'api' => function () { require 'api.php'; /* Handoff further routing to API script. */ }
 ];
 
 //print_r($path_array);
