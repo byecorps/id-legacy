@@ -48,6 +48,13 @@ if (str_ends_with($path_raw, '/') && $path_raw != '/') {
 $routes = [
     '' => function () { require 'views/home.php'; },
     'api' => function () { require 'api.php'; /* Handoff further routing to API script. */ },
+    'auth' => function () {
+        global $path;
+
+        if ($path[2] == 'signup') {
+            require 'views/signup.php';
+        }
+    },
     'profile' => function () {
         global $path, $user, $profile_owner; // don't forget this lol
 
