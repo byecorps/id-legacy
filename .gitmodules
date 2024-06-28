@@ -1,0 +1,4 @@
+[submodule "strings"]
+	path = strings
+	branch = main
+	url = https://github.com/byecorps/id-strings
