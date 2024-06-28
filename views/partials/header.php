@@ -7,6 +7,6 @@
     </div>
 
     <div>
-        Login disabled.
+        <a href="/auth/signup"><?= get_string("auth.signup") ?></a>
     </div>
 </header>
