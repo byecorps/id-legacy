@@ -8,5 +8,6 @@
 
     <div>
         <a href="/auth/signup"><?= get_string("auth.signup") ?></a>
+        <a href="/auth/login"><?= get_string("auth.login") ?></a>
     </div>
 </header>

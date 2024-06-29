@@ -38,6 +38,20 @@ $uri_explode = explode('?', $uri_string);
 $path_raw = $uri_explode[0]; // `/foo/bar`
 $path = explode('/', $path_raw);
 
+
+if(isset($uri_explode[1])) {
+    $uri_string = $uri_explode[0];
+    $uri_explode = explode('&', $uri_explode[1]);
+    $query = array();
+    foreach($uri_explode as $string) {
+        $bits = explode('=', $string);
+        $query[$bits[0]] = $bits[1];
+    }
+}
+else {
+    $query = array();
+}
+
 // Remove trailing slashes
 if (str_ends_with($path_raw, '/') && $path_raw != '/') {
     http_response_code(308);
@@ -53,7 +67,13 @@ $routes = [
 
         if ($path[2] == 'signup') {
             require 'views/signup.php';
+            exit;
+        } else if ($path[2] == 'login') {
+            require 'views/login.php';
+            exit;
         }
+
+        return 404;
     },
     'profile' => function () {
         global $path, $user, $profile_owner; // don't forget this lol

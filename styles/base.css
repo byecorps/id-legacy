@@ -38,6 +38,10 @@ main {
 
 footer {
     flex: 0;
+
+    text-align: center;
+
+    margin: 16px;
 }
 
 #content {
