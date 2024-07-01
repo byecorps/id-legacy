@@ -40,6 +40,35 @@ function format_bcid ($bcid): string
 }
 
 function get_user_by_id($bcid) {
-    $user = db_execute('SELECT * FROM accounts WHERE id = ? LIMIT 1', [$bcid]);
-    return $user;
+    return db_execute('SELECT * FROM accounts WHERE id = ? LIMIT 1', [$bcid]);
+}
+
+function get_user_display_name($userId, $escape = true) {
+    global $user;
+
+    if (!$_SESSION['auth']) {
+        return '';
+    }
+
+    $target = array();
+    if ($userId == $user['id']) {
+        $target = $user;
+    } else {
+        $target = get_user_by_id($userId);
+    }
+
+    if (is_null($user['display_name'])) {
+        try {
+            return format_bcid($user['id']);
+        } catch (Exception $e) {
+            return 'Invalid BCID';
+        }
+    }
+
+    $display_name = $user['display_name'];
+    if ($escape) {
+        $display_name = htmlspecialchars($display_name);
+    }
+
+    return $display_name;
 }

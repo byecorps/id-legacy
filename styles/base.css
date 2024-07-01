@@ -30,6 +30,15 @@ header {
     color: var(--dark-slate-gray);
 }
 
+header > .section {
+    display: flex;
+    gap: 1em;
+}
+
+.largeicon {
+    font-size: 48px;
+}
+
 main {
     flex: 1;
 
@@ -89,4 +98,8 @@ body > .errorbox {
 
 .bc-3 {
     font-weight: 400;
+}
+
+.center {
+    text-align: center;
 }

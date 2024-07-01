@@ -12,7 +12,7 @@ http_response_code(404);
     <?php include "partials/header.php"; ?>
 
     <main>
-        <div id="content">
+        <div id="content" class="center">
             <h1>404</h1>
             <p>Sorry, but that doesn't exist anymore.</p>
             <p><small>(or it never existed)</small></p>

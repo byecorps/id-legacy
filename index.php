@@ -38,7 +38,7 @@ $uri_explode = explode('?', $uri_string);
 $path_raw = $uri_explode[0]; // `/foo/bar`
 $path = explode('/', $path_raw);
 
-
+$query = array();
 if(isset($uri_explode[1])) {
     $uri_string = $uri_explode[0];
     $uri_explode = explode('&', $uri_explode[1]);
@@ -63,17 +63,18 @@ $routes = [
     '' => function () { require 'views/home.php'; },
     'api' => function () { require 'api.php'; /* Handoff further routing to API script. */ },
     'auth' => function () {
-        global $path;
+        global $path, $query;
 
-        if ($path[2] == 'signup') {
+        if ($path[2] == 'signout') {
+            require 'views/signedout.php';
+        } else if ($path[2] == 'signup') {
             require 'views/signup.php';
-            exit;
         } else if ($path[2] == 'login') {
             require 'views/login.php';
-            exit;
+        } else {
+            return 404;
         }
-
-        return 404;
+        exit();
     },
     'profile' => function () {
         global $path, $user, $profile_owner; // don't forget this lol

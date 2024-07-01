@@ -10,4 +10,29 @@
     --fern-green: #65743a;
     --flax: #efdd8d;
     --mindaro: #f4fdaf;
+
+    --grey-5: #adb5bd;
+
+    --red-2: #ffc9c9;
+    --red-3: #ffa8a8;
+    --red-7: #f03e3e;
+    --red-9: #c92a2a;
+
+    --link-fg: var(--dark-slate-gray);
+    --error-fg: var(--red-9);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --link-fg: var(--flax);
+        --error-fg: var(--red-3);
+    }
+}
+
+.error-fg {
+    color: var(--error-fg);
+}
+
+a {
+    color: var(--link-fg);
 }
