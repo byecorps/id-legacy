@@ -1,0 +1,21 @@
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul > li + li {
+    border-top: var(--grey-5) 1px solid;
+}
+
+ul > li > a {
+    display: flex;
+    padding: 1rem;
+    gap: 0.25rem;
+
+    color: var(--non-color-link-fg);
+    text-decoration: none;
+}
+
+ul > li:hover {
+    background: var(--hover-bg);
+}

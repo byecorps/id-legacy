@@ -11,7 +11,9 @@
     --flax: #efdd8d;
     --mindaro: #f4fdaf;
 
+    --gray-0: #f8f9fa;
     --grey-5: #adb5bd;
+    --gray-9: #212529;
 
     --red-2: #ffc9c9;
     --red-3: #ffa8a8;
@@ -19,12 +21,18 @@
     --red-9: #c92a2a;
 
     --link-fg: var(--dark-slate-gray);
+    --non-color-link-fg: var(--gray-9);
+
+    --hover-bg: var(--gray-1);
+
     --error-fg: var(--red-9);
 }
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
         --link-fg: var(--flax);
+        --non-color-link-fg: var(--gray-0);
+        --hover-bg: var(--gray-9);
         --error-fg: var(--red-3);
     }
 }

@@ -25,7 +25,6 @@ require_once 'common/strings.php';
 require_once 'common/account_utils.php';
 require_once 'common/database.php';
 
-patch_lang('en_UWU');
 
 // Starts the session
 // TODO: write this to use the database to work across more than one server (e.g. don't use PHP sessions)

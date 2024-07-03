@@ -16,14 +16,17 @@ if (is_null($user)) {
 <body>
     <?php include "partials/header.php" ?>
 
-    <?php
-    if ($error) {
-        include 'partials/error.php';
-        include 'partials/footer.php';
-        exit();
-    }
-    ?>
-    <p><?= $profile_owner['id'] ?></p>
+    <main>
+        <?php
+        if ($error) {
+            include 'partials/error.php';
+            include 'partials/footer.php';
+            exit();
+        }
+        ?>
+        <p><?= $profile_owner['id'] ?></p>
+
+    </main>
 
     <?php include 'partials/footer.php' ?>
 
