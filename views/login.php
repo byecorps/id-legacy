@@ -2,7 +2,7 @@
 
 if ($_SESSION['auth']) {
     if (key_exists('callback', $query)) {
-        header('Location: ' . $query['callback']);
+        header('Location: ' . urldecode($query['callback']));
     } else {
         header('Location: /dashboard');
     }
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['id'] = $user_to_log_in_as['id'];
 
         if (key_exists('callback', $query)) {
-            header('Location: ' . $query['callback']);
+            header('Location: ' . urldecode($query['callback']));
         } else {
             header('Location: /dashboard');
         }
