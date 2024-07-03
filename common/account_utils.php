@@ -72,3 +72,15 @@ function get_user_display_name($userId, $escape = true) {
 
     return $display_name;
 }
+
+function requires_auth($redirect = '/auth/login') {
+    global $path_raw;
+
+    if ($_SESSION['auth']) {
+        return true;
+    }
+
+    http_response_code(307);
+    header('Location: '.$redirect.'?callback='.urlencode($path_raw));
+    exit();
+}

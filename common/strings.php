@@ -1,6 +1,6 @@
 <?php
 
-function get_string($key="generic.generic") {
+function get_string($key="generic.generic", $substitutes=[]) {
     global $LANG;
 
     $key_path = explode('.', $key);
@@ -15,10 +15,20 @@ function get_string($key="generic.generic") {
         }
     }
 
+    if (count($substitutes) > 0) {
+        foreach ($substitutes as $key => $substitute) {
+            $re = '/{{('. $key .')}}/';
+            $subst = $substitute;
+
+            $result = preg_replace($re, $subst, $result, 1);
+        }
+    }
+
     return $result;
 }
 
-function patch_lang($lang="en") {
+function patch_lang($lang="en"): void
+{
 
     global $LANG, $DOC_ROOT;
 
