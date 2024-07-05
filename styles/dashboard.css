@@ -19,3 +19,20 @@ ul > li > a {
 ul > li:hover {
     background: var(--hover-bg);
 }
+
+.grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 2fr;
+}
+
+.id-card {
+    align-self: center;
+    background: var(--hover-bg);
+    padding: 1rem;
+    border-radius: 1.5rem;
+}
+
+.id-card > img {
+    border-radius: 0.5rem;
+}

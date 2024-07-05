@@ -100,6 +100,29 @@ body > .errorbox {
     font-weight: 400;
 }
 
+.id-card {
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.id-card > img {
+    height: 128px;
+}
+
+.id-card > .info {
+    margin: auto 0;
+}
+
+.id-card .display_name {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.id-card .id {
+    font-size: 1.2rem;
+    font-family: 'Grotesk Mono', monospace;
+}
+
 .center {
     text-align: center;
 }

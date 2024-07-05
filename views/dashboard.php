@@ -10,6 +10,14 @@
         <main>
             <h1><?= get_string('page.dashboard') ?></h1>
             <div class="grid">
+                <div class="id-card">
+                    <img src="https://cdn.id.byecorps.com/profile/281G3NV" alt="" />
+                    <div class="info">
+                        <div class="display_name"><?= get_user_display_name($_SESSION['id']) ?></div>
+                        <div class="id"><?= format_bcid($_SESSION['id']) ?></div>
+                        <div class="join-date"><?= get_string('idcard.joined', ['date' => $user['created_date']]) ?></div>
+                    </div>
+                </div>
                 <ul>
                     <li>
                         <a href="/profile" class="item">
@@ -21,6 +29,12 @@
                         <a href="/settings" class="item">
                             <div class="icon"><span class="fa-fw fa-solid fa-cog"></span></div>
                             <div class="label"><?= get_string('page.settings') ?></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/settings/apps" class="item">
+                            <div class="icon"><span class="fa-fw fa-solid fa-lock"></span></div>
+                            <div class="label"><?= get_string('page.manageAppAccess') ?></div>
                         </a>
                     </li>
                     <li>
