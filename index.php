@@ -25,10 +25,18 @@ require_once 'common/strings.php';
 require_once 'common/account_utils.php';
 require_once 'common/database.php';
 
-
 // Starts the session
 // TODO: write this to use the database to work across more than one server (e.g. don't use PHP sessions)
 session_start();
+
+if (empty($_SESSION)) {
+    $_SESSION['auth'] = false;
+    $_SESSION['id'] = null;
+}
+
+if (!isset($_SESSION['lang'])) {
+    $_SESSION['lang'] =  get_language_code_based_on_browser_locale();
+}
 
 $user = null;
 
@@ -61,6 +69,14 @@ if (str_ends_with($path_raw, '/') && $path_raw != '/') {
     exit;
 }
 
+// If there's a 'lang' query param, change the language!
+if (array_key_exists('lang', $query)) {
+    $_SESSION['lang'] = $query['lang'];
+}
+
+patch_lang($_SESSION['lang']);
+
+
 $routes = [
     '' => function () { require 'views/home.php'; },
     'api' => function () {
@@ -85,6 +101,17 @@ $routes = [
         }
         exit();
     },
+    'dashboard' => function () {
+        global $user;
+        requires_auth();
+
+        if (isset($path[2])) {
+            return 404;
+        }
+
+        require 'views/dashboard.php';
+        return 200;
+    },
     'profile' => function () {
         global $path, $user, $profile_owner; // don't forget this lol
 
@@ -101,15 +128,8 @@ $routes = [
         require 'views/profile.php';
         return 200;
     },
-    'dashboard' => function () {
-        requires_auth();
-
-        if (isset($path[2])) {
-            return 404;
-        }
-
-        require 'views/dashboard.php';
-        return 200;
+    'settings' => function () {
+        require 'views/settings.php';
     }
 ];
 

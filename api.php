@@ -8,6 +8,23 @@ $routes = [
         exit();
     },
 
+    'i11n' => function () {
+        global $path;
+        return match ($path[2]) {
+            'languages' => [
+                "response" => [
+                    'success' => true,
+                    'status_code' => 200
+                ],
+                'body' => [
+                    'current' => $_SESSION['lang'],
+                    'languages' => LANGAUGES
+                ]
+            ],
+            default => 404,
+        };
+    },
+
     'status' => function () {
         http_response_code(200);
 

@@ -1,5 +1,33 @@
 <?php
 
+const LANGAUGES = [
+    [
+        "code" => 'en',
+        "name" => "English (Traditional)",
+        "flag" => "uk"
+    ],
+    [
+        'code' => 'en_US',
+        "name" => 'English (Simplified)',
+        'flag' => 'usa'
+    ],
+    [
+        'code' => 'en_UWU',
+        'name' => 'Cute English',
+        'flag' => 'owo'
+    ],
+    [
+        'code' => 'ga',
+        'name' => 'Irish',
+        'flag' => 'ie'
+    ],
+    [
+        'code' => 'nb_NO',
+        'name' => 'Norwegian Bokmål',
+        'flag' => 'no'
+    ]
+];
+
 function get_string($key="generic.generic", $substitutes=[]) {
     global $LANG;
 
@@ -25,6 +53,27 @@ function get_string($key="generic.generic", $substitutes=[]) {
     }
 
     return $result;
+}
+
+function get_language_code_based_on_browser_locale(): string
+{
+    $locale = locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+
+    $locales = [ // Converts locale to its respective language.
+        'en_GB' => 'en',
+        'en_IE' => 'en',
+        'en' => 'en',
+    ];
+
+    if (array_key_exists($locale, $locales)) {
+        return $locales[$locale];
+    }
+
+    if (str_starts_with("en", $locale)) {
+        return "en";
+    }
+
+    return $locale;
 }
 
 function patch_lang($lang="en"): void
