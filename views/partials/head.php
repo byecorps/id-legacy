@@ -9,6 +9,8 @@ if (isset($page_title)) {
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="https://cdn.byecorps.com/global/fonts/fontawesome/js/all.min.js" defer></script>
 <link rel="stylesheet" href="/styles/base.css">
+<link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+<link href="https://fonts.bunny.net/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon">
 
 <!-- Apple web app stuff -->
