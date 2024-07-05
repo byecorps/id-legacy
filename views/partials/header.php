@@ -10,6 +10,7 @@
         <?php
             if ($_SESSION['auth']) {
                 echo '<div class="item">' . get_string("header.hello", ['display_name' => get_user_display_name($_SESSION['id'])]) . '</div>';
+                echo '<a class="item" href="/dashboard">' . get_string('page.dashboard') . '</a>';
                 echo '<div class="item"><a href="/auth/signout">'. get_string('auth.signout') .'</a></div>';
             }
             else {
