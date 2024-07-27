@@ -3,6 +3,7 @@
 $DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
 
 require_once $DOC_ROOT . '/vendor/autoload.php';
+use Intervention\Image\ImageManager;
 
 // Includes
 try {
@@ -19,11 +20,18 @@ try {
     echo "<b>Critical error:</b> " . $e->getMessage() . "<br />Please contact the developers.";
 }
 
+$bunny_client = new \Bunny\Storage\Client(BUNNY_ACCESS_KEY, BUNNY_STORAGE_ZONE, \Bunny\Storage\Region::STOCKHOLM);
+
 require_once 'strings/en.php'; // This ensures strings will fall back to English if one is missing.
 
 require_once 'common/strings.php';
-require_once 'common/account_utils.php';
+require_once 'common/validation.php';
 require_once 'common/database.php';
+require_once 'common/account_utils.php';
+require_once 'common/files.php';
+require_once 'common/misc.php';
+
+$flash = [];
 
 // Starts the session
 // TODO: write this to use the database to work across more than one server (e.g. don't use PHP sessions)
@@ -42,6 +50,7 @@ $user = null;
 
 if ($_SESSION['auth']) {
     $user = get_user_by_id($_SESSION['id']);
+    $_SESSION['lang'] = $user['language'];
 }
 
 $uri_string = $_SERVER['REQUEST_URI'];  // `/foo/bar?bar=foo&foo=bar`
@@ -72,6 +81,7 @@ if (str_ends_with($path_raw, '/') && $path_raw != '/') {
 // If there's a 'lang' query param, change the language!
 if (array_key_exists('lang', $query)) {
     $_SESSION['lang'] = $query['lang'];
+    location($path_raw);
 }
 
 patch_lang($_SESSION['lang']);
@@ -79,6 +89,18 @@ patch_lang($_SESSION['lang']);
 
 $routes = [
     '' => function () { require 'views/home.php'; },
+    'admin' => function () {
+        global $path, $query, $DOC_ROOT, $flash;
+
+        requires_auth();
+        requires_admin();
+
+        switch ($path[2]) {
+            default: return 404;
+            case 'files':
+                require 'views/admin/files.php';
+        }
+    },
     'api' => function () {
         global $path, $query;
 
@@ -88,16 +110,20 @@ $routes = [
         require 'api.php'; /* Handoff further routing to API script. */
     },
     'auth' => function () {
-        global $path, $query;
+        global $path, $query, $flash;
 
-        if ($path[2] == 'signout') {
-            require 'views/signedout.php';
-        } else if ($path[2] == 'signup') {
-            require 'views/signup.php';
-        } else if ($path[2] == 'login') {
-            require 'views/login.php';
-        } else {
-            return 404;
+        switch ($path[2]) {
+            case 'signout':
+                require 'views/signedout.php';
+                break;
+            case 'signup':
+                require 'views/signup.php';
+                break;
+            case 'login':
+                require 'views/login.php';
+                break;
+            default:
+                return 404;
         }
         exit();
     },
@@ -119,6 +145,13 @@ $routes = [
             if (isset($path[3])) {
                 return 404;
             }
+
+            if ($path[2] == 'edit') {
+                requires_auth();
+                require 'views/profile_edit.php';
+                return 200;
+            }
+
             $profile_owner = $path[2];
             $profile_owner = get_user_by_id($profile_owner);
         } else {
@@ -129,7 +162,20 @@ $routes = [
         return 200;
     },
     'settings' => function () {
-        require 'views/settings.php';
+        global $path, $flash, $user;
+        if (isset($path[2])) {
+            switch ($path[2]) {
+                default: return 404;
+                case 'security':
+                    require 'views/settings_security.php';
+                    break;
+                case 'region':
+                    require 'views/settings_region.php';
+                    break;
+            }
+        } else {
+            require 'views/settings.php';
+        }
     }
 ];
 

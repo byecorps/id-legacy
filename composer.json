@@ -1,5 +1,11 @@
 {
     "require": {
-        "bunnycdn/storage": "^3.3"
+        "bunnycdn/storage": "^3.3",
+        "kornrunner/blurhash": "^1.2",
+        "lbuchs/webauthn": "^2.2",
+        "intervention/image": "^3.7",
+        "ext-gd": "*",
+        "ext-imagick": "*",
+        "ext-fileinfo": "*"
     }
 }

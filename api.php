@@ -8,7 +8,7 @@ $routes = [
         exit();
     },
 
-    'i11n' => function () {
+    'i18n' => function () {
         global $path;
         return match ($path[2]) {
             'languages' => [

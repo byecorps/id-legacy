@@ -1,0 +1,53 @@
+
+form.mini-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    background: var(--input-bg);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.input label {
+    font-size: 0.8rem;
+    float: right;
+}
+
+.input input {
+    all: unset;
+}
+
+.input:has([data-com-onepassword-filled='light']) {
+    background-color: hsl(210, 100%, 93%);
+}
+
+.input:has([data-com-onepassword-filled='dark']) {
+    background-color: rgb(36, 107, 179);
+}
+
+.input:has(:-internal-autofill-selected) {
+    background-color: light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4));
+}
+
+button, .button {
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+    border-radius: 0.5rem;
+    border: rgba(136, 136, 136, 0.3) 1px solid;
+    font-family: "Montserrat", system-ui, sans-serif;
+
+    cursor: pointer;
+}
+
+button.primary, .button.primary {
+    background: var(--button-primary-bg);
+}
+
+button.primary:hover, .button.primary:hover {
+    background: var(--button-primary-hover-bg);
+}

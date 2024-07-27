@@ -33,7 +33,7 @@ function format_bcid ($bcid): string
     $stripped_bcid = strtoupper($stripped_bcid);
 
     if (!validate_bcid($stripped_bcid)) {
-        throw new Exception('Invalid BCID.');
+        return '999-9999';
     }
 
     return substr($stripped_bcid, 0, 3).'-'.substr($stripped_bcid, -4, 4);
@@ -45,10 +45,6 @@ function get_user_by_id($bcid) {
 
 function get_user_display_name($userId, $escape = true) {
     global $user;
-
-    if (!$_SESSION['auth']) {
-        return '';
-    }
 
     $target = array();
     if ($userId == $user['id']) {
@@ -73,6 +69,40 @@ function get_user_display_name($userId, $escape = true) {
     return $display_name;
 }
 
+function get_user_avatar($userId) {
+    global $user;
+
+    if (!$_SESSION['auth']) {
+        return 'https://cdn.id.byecorps.com/profile/default.png';
+    }
+
+    $target = array();
+    if ($userId == $user['id']) {
+        $target = $user;
+    } else {
+        $target = get_user_by_id($userId);
+    }
+
+    $avatar = db_execute('SELECT * FROM avatars JOIN neo_id.files f on f.id = avatars.file_id WHERE avatars.owner = ?',
+                        [ $target['id'] ]);
+
+    if ($avatar) {
+//        echo '<pre>'; print_r($avatar); echo '</pre>';
+        return 'https://cdn.id.byecorps.com/' . $avatar['path'];
+    }
+
+    return 'https://cdn.id.byecorps.com/profile/default.png';
+}
+
+function set_user_language(string $lang_code, string $id): void
+{
+    db_execute(
+        'UPDATE accounts SET language = ? WHERE id = ?',
+        [$lang_code, $id]
+    );
+    $_SESSION['lang'] = $lang_code;
+}
+
 function requires_auth($redirect = '/auth/login') {
     global $path_raw;
 
@@ -83,4 +113,14 @@ function requires_auth($redirect = '/auth/login') {
     http_response_code(307);
     header('Location: '.$redirect.'?callback='.urlencode($path_raw));
     exit();
+}
+
+function requires_admin() {
+    global $user;
+
+    if ($user['is_admin']) {
+        return true;
+    }
+
+    return false;
 }

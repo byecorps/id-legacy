@@ -18,14 +18,22 @@ if (is_null($user)) {
 
     <main>
         <?php
-        if ($error) {
+        if (isset($error)) {
             include 'partials/error.php';
             include 'partials/footer.php';
             exit();
         }
         ?>
-        <p><?= $profile_owner['id'] ?></p>
 
+        <div id="profile-wrapper">
+            <img id="profile-image"
+                 src="<?= get_user_avatar($profile_owner['id']) ?>"
+                 alt="<?= get_user_display_name($profile_owner['id']) ?>'s avatar" />
+            <div id="profile-user-info">
+                <span id="profile-display-name"><?= get_user_display_name($profile_owner['id']) ?></span>
+                <span id="profile-bcid"><?= format_bcid($profile_owner['id']) ?></span>
+            </div>
+        </div>
     </main>
 
     <?php include 'partials/footer.php' ?>

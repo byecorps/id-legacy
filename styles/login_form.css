@@ -1,0 +1,23 @@
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    max-width: 600px;
+    margin: auto;
+}
+
+.login-form > * {
+    margin: 0;
+}
+
+.login-form > *[type=submit] {
+    margin: 0 auto;
+}
+
+.passkey {
+    max-width: 600px;
+    margin: auto;
+}
+

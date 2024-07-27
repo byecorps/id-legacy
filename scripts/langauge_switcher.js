@@ -2,7 +2,7 @@
 const select = document.createElement('select');
 const script = document.scripts[document.scripts.length - 1];
 
-const langs_req = fetch('/api/i11n/languages')
+const langs_req = fetch('/api/i18n/languages')
     .then(async data => {
         return await data.json();
     })

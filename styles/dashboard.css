@@ -16,15 +16,20 @@ ul > li > a {
     text-decoration: none;
 }
 
+ul > li:has(.selected) {
+    background: var(--selected-bg);
+}
+
 ul > li:hover {
-    background: var(--hover-bg);
+    background: var(--hover-bg) !important;
 }
 
 .grid {
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: minmax(400px, 1fr) 3fr;
 }
+
 
 .id-card {
     align-self: center;
@@ -35,4 +40,41 @@ ul > li:hover {
 
 .id-card > img {
     border-radius: 0.5rem;
+}
+
+.settingsthingy h3 {
+    margin-bottom: 0;
+}
+
+.grid.halfandhalf {
+    grid-template-columns: 1fr 1fr;
+}
+
+.language-selector {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.language-selector label {
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    background: var(--input-bg);
+}
+
+.language-selector label:hover {
+    background: var(--selected-bg);
+}
+
+@media screen and (max-width: 880px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 700px)  {
+    .grid.halfandhalf {
+        grid-template-columns: 1fr;
+    }
 }
