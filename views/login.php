@@ -10,6 +10,11 @@ if ($_SESSION['auth']) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!validate_csfr()) {
+        flash(get_string('error.generic'), $flash);
+        goto skip;
+    }
+
     // Validate email address
     if (!validate_email($_POST['email'])) {
         $error_body = get_string('error.invalidEmail');
@@ -67,13 +72,15 @@ skip:
         if (isset($subtitle)) {
             echo '<p class="subtitle center">'. $subtitle .'</p>';
         }
-        ?>
-        <?php
+
         if (isset($error_body)) {
             include 'partials/error.php';
         }
         ?>
+        
         <form class="login-form" method="post">
+            <?= csfr_input() ?>
+
             <div class="input"><label for="email"><?= get_string("auth.email") ?></label>
                 <input type="email" name="email" id="email" /></div>
             <div class="input"><label for="password"><?= get_string("auth.password") ?></label>

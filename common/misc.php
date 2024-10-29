@@ -12,6 +12,14 @@ function location(string $url):void
     exit();
 }
 
-function flash(string $text, string $type, array &$flash) {
+function flash(string $text, array &$flash, string $type="warning") {
     $flash[] = ['text' => $text, 'type' => $type];
+}
+
+function show_flash(array $flash) {
+    $output = '<ul class="flash">';
+    foreach ($flash as $item) {
+        $output .= '<li>'. $item['text'] .'</li>';
+    }
+    return $output;
 }

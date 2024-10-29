@@ -3,8 +3,17 @@
 function update_language(): void
 {
     global $user;
+    if (is_null($user)) {
+        $user['id'] = DEMO_USER;
+    }
     set_user_language($_POST['lang'], $user['id']);
-    location('/settings/region');
+    location('/settings/region?success=true');
+}
+
+if (array_key_exists('success', $query)) {
+    if ($query['success'] == 'true') {
+        flash(get_string('generic.languageUpdated'), $flash);
+    }
 }
 
 if (isset($path[3])) {
@@ -37,11 +46,16 @@ if (isset($path[3])) {
 <main>
     <h1><span class="fa-solid fa-fw fa-cog"></span> <?= get_string('page.settings'); ?></h1>
     <div class="grid">
-        <?php include 'partials/settings_list.php' ?>
+        <?php
+            if ($_SESSION['auth']) {
+                include 'partials/settings_list.php';
+            }
+        ?>
         <div class="settingsthingy">
             <h2><?= get_string('settings.region') ?></h2>
             <p>Here you can set the language ByeCorps ID is displayed in.</p>
             <form action="/settings/region/set_language" method="post">
+                <?= show_flash($flash); ?>
                 <div class="language-selector">
                     <?php
                     foreach (LANGAUGES as $lang) {
@@ -51,7 +65,7 @@ if (isset($path[3])) {
                         }
                         echo '<label>
                     <input type="radio" name="lang" '.$checked.' id="lang" value="'. $lang['code'] . '" />
-                    '. $lang['name'] .'
+                    '. get_string('language.'.$lang['code']) .' - '. $lang['name'] .'
                 </label>';
                     }
                     ?>

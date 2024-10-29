@@ -1,5 +1,7 @@
 <?php
 
+const DEMO_USER = "9999999";
+
 function generate_bcid($duplicate_check=false): string
 {
     $CHARS = str_split("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
@@ -94,13 +96,18 @@ function get_user_avatar($userId) {
     return 'https://cdn.id.byecorps.com/profile/default.png';
 }
 
-function set_user_language(string $lang_code, string $id): void
+function set_user_language(string $lang_code, string $id="9999999"): void
 {
+    $_SESSION['lang'] = $lang_code;
+
+    if ($id == DEMO_USER) {
+        return;
+    }
+
     db_execute(
         'UPDATE accounts SET language = ? WHERE id = ?',
         [$lang_code, $id]
     );
-    $_SESSION['lang'] = $lang_code;
 }
 
 function requires_auth($redirect = '/auth/login') {
