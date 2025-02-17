@@ -28,6 +28,7 @@ require_once 'common/strings.php';
 require_once 'common/validation.php';
 require_once 'common/database.php';
 require_once 'common/account_utils.php';
+require_once 'common/app_utils.php';
 require_once 'common/files.php';
 require_once 'common/misc.php';
 
@@ -88,21 +89,25 @@ patch_lang($_SESSION['lang']);
 
 
 $routes = [
-    '' => function () { require 'views/home.php'; },
+    '' => function () { global $user; require 'views/home.php'; },
     'admin' => function () {
-        global $path, $query, $DOC_ROOT, $flash;
+        global $path, $query, $DOC_ROOT, $flash, $user;
 
         requires_auth();
         requires_admin();
 
-        switch ($path[2]) {
-            default: return 404;
-            case 'files':
-                require 'views/admin/files.php';
+        if (key_exists(2, $path)) {
+            switch ($path[2]) {
+                default: return 404;
+                case 'files':
+                    require 'views/admin/files.php';
+            }
+        } else {
+            require 'views/admin/dashboard.php';
         }
     },
     'api' => function () {
-        global $path, $query;
+        global $path, $query, $user;
 
         unset($path[1]);
         $path = array_values($path);
@@ -110,7 +115,7 @@ $routes = [
         require 'api.php'; /* Handoff further routing to API script. */
     },
     'auth' => function () {
-        global $path, $query, $flash;
+        global $path, $query, $flash, $user;
 
         switch ($path[2]) {
             case 'signout':
@@ -121,6 +126,9 @@ $routes = [
                 break;
             case 'login':
                 require 'views/login.php';
+                break;
+            case 'oauth':
+                require 'views/oauth_login.php';
                 break;
             default:
                 return 404;
@@ -162,7 +170,7 @@ $routes = [
         return 200;
     },
     'settings' => function () {
-        global $path, $flash, $user;
+        global $path, $flash, $user, $query;
         if (isset($path[2])) {
             switch ($path[2]) {
                 default: return 404;

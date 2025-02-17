@@ -12,20 +12,26 @@ const LANGAUGES = [
         'flag' => 'usa'
     ],
     [
-        'code' => 'en_UWU',
-        'name' => 'Cute English',
-        'flag' => 'owo'
+        'code' => 'fi',
+        'name' => 'suomi'
     ],
     [
         'code' => 'ga',
-        'name' => 'Irish',
+        'name' => 'Gaeilge',
         'flag' => 'ie'
     ],
     [
         'code' => 'nb_NO',
-        'name' => 'Norwegian Bokmål',
+        'name' => 'Norsk bokmål',
         'flag' => 'no'
-    ]
+    ],
+
+    // Joke languages
+    [
+        'code' => 'en_UWU',
+        'name' => 'Cute English',
+        'flag' => 'owo'
+    ],
 ];
 
 function get_string($key="generic.generic", $substitutes=[]) {

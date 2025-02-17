@@ -4,6 +4,7 @@
         <div><?= get_string('footer.executionTime', ['time'=>round((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000, 3)]) ?></div>
     </div>
     <div class="item">
-        <script src="/scripts/langauge_switcher.js" defer></script>
+        <p><a href="/settings/region"><?= get_string('generic.changeLanguage') ?> - Change language</a></p>
+<!--        <script src="/scripts/langauge_switcher.js" defer></script>-->
     </div>
 </footer>

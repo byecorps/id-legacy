@@ -1,5 +1,31 @@
 <?php
 
+function csfr(): string
+{
+    $token = bin2hex(random_bytes(32));
+    $_SESSION['CSFR_TOKEN'] = $token;
+    return $token;
+}
+
+function csfr_input($echo = false): string
+{
+    $token = csfr();
+    $output = "<input type='hidden' name='CSFR_TOKEN' value='$token' />";
+    if ($echo) echo $output;
+    else return $output;
+}
+
+function validate_csfr($token = null): bool
+{
+    $token = $token ?: $_REQUEST['CSFR_TOKEN'];
+
+    if ($_SESSION['CSFR_TOKEN'] == $token) {
+        return true;
+    }
+
+    return false;
+}
+
 function validate_email($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
