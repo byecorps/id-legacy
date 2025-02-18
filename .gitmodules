@@ -1,4 +1,4 @@
 [submodule "strings"]
 	path = strings
 	branch = main
-	url = https://github.com/byecorps/id-strings
+	url = https://shinonome.rocks/byecorps/id-strings.git
