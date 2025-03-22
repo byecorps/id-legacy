@@ -1,3 +1,6 @@
+> [!important]
+> This is the old version of ByeCorps ID. For an up to date version, please see [shinonome.rocks/byecorps/id/id](https://shinonome.rocks/byecorps/id/id) or [github.com/byecorps/id](https://github.com/byecorps/id)
+
 # id
 OAuth authentication service for ByeCorps &amp; other services
 
